@@ -167,7 +167,7 @@ mm.add("(min-width:769px)",function(){
             invalidateOnRefresh: true,
         },
         xPercent: -100,
-        x:function(){ return (window.innerWidth - 65); }
+        x:function(){ return (window.innerWidth - 65) * 0.25; }
     });
     // sidepj gsap
     const sidepj = gsap.timeline({
