@@ -162,12 +162,12 @@ mm.add("(min-width:769px)",function(){
         scrollTrigger: {
             trigger: '.projects-sec',
             start:"0% 0%",
-            end: "100% 100%",
+            end: () => `+=${window.innerWidth * 1.5}`,
             scrub: 1,
             invalidateOnRefresh: true,
         },
         xPercent: -100,
-        x:function(){ return (window.innerWidth - 65) * 0.25; }
+        x: () => -(window.innerWidth - 65) * 0.25,
     });
     // sidepj gsap
     const sidepj = gsap.timeline({
