@@ -1,9 +1,9 @@
 history.scrollRestoration = "manual"
 //lenis 스크롤 스무스
-const lenis = new Lenis({ wheelMultiplier: 0.5 });
+const lenis = new Lenis({ wheelMultiplier: 0.85 });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
-  lenis.raf(time * 500); 
+  lenis.raf(time * 800); 
 });
 gsap.ticker.lagSmoothing(0);
 
@@ -167,7 +167,7 @@ mm.add("(min-width:769px)",function(){
             invalidateOnRefresh: true,
         },
         xPercent: -100,
-        x: function() { return (window.innerWidth - 65) * 0.5; }
+        x: function() { return (window.innerWidth - 65) * 0.3; }
     });
     // sidepj gsap
     const sidepj = gsap.timeline({
