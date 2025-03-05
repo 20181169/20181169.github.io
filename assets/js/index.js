@@ -163,7 +163,7 @@ mm.add("(min-width:769px)",function(){
             trigger: '.projects-sec',
             start:"0% 0%",
             end:"100% 100%",
-            scrub: 2, // scrub 값을 1에서 2로 변경
+            scrub: 10, // scrub 값을 1에서 2로 변경
             invalidateOnRefresh: true,
         },
         xPercent: -100,
