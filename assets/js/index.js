@@ -158,16 +158,16 @@ mm.add("(min-width:769px)",function(){
         x:200,
     });
     // mainprojects gsap
-    const projects = gsap.to('.projects-list',{
+    const projects = gsap.to('.projects-list', {
         scrollTrigger: {
             trigger: '.projects-sec',
             start:"0% 0%",
-            end: "100% 100%",
-            scrub: 1,
+            end:"100% 100%",
+            scrub: 2, // scrub 값을 1에서 2로 변경
             invalidateOnRefresh: true,
         },
         xPercent: -100,
-        x:function(){ return (window.innerWidth - 65); }
+        x: function() { return (window.innerWidth - 65); }
     });
     // sidepj gsap
     const sidepj = gsap.timeline({
