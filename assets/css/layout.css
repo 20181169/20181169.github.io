@@ -2,7 +2,9 @@
 @import './common.css';
 @import './fonts.css';
 
-/* header */
+/* ----------------------------------
+   Header
+---------------------------------- */
 .header {
   position: fixed;
   top: 0; 
@@ -98,7 +100,9 @@
   background-image: linear-gradient(to top, var(--dark), #140d0d00);
 }
 
-/* footer css */
+/* ----------------------------------
+   Footer
+---------------------------------- */
 .footer {
   position: relative;
 }
@@ -209,7 +213,9 @@ copyrights {
   }
 }
 
-/* 반응형 대응 */
+/* ----------------------------------
+   반응형 대응 (768px 이하)
+---------------------------------- */
 @media (max-width:768px) {
   /* header */
   .header-inner {
@@ -288,5 +294,112 @@ copyrights {
   /* footer */
   .address-content {
     padding: 0px 10px;
+  }
+}
+
+/* ----------------------------------
+   Experiences Horizontal Timeline (가로 타임라인)
+---------------------------------- */
+.experience-sec {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 스크롤 시 한 화면 꽉 차도록 높이 지정 (pin 효과) */
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.experience-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.experience-title {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* 실제 타임라인(가로 스크롤) */
+.horizontal-timeline {
+  display: flex;
+  align-items: center;
+  gap: 200px; /* 각 아이템 사이 간격 */
+  position: relative;
+  width: max-content; /* 내부 아이템 개수만큼 가로로 확장 */
+  margin: 0 auto;
+}
+
+/* 각 타임라인 아이템 */
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0; /* 수평 길이 축소 방지 */
+}
+
+/* 도트 */
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  background: #333;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* 도트 좌우 연결 라인 */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 8px; /* .timeline-dot 높이의 절반 */
+  left: -100px; /* gap의 절반에 해당 */
+  width: 200px; /* gap과 동일 */
+  height: 2px;
+  background: #333;
+  z-index: 1;
+}
+.timeline-item:first-child::before {
+  content: none; /* 첫 아이템은 좌측 라인 제거 */
+}
+
+/* 날짜, 제목, 내용 */
+.timeline-date {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.timeline-title {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.timeline-desc {
+  width: 300px; /* 한 줄 너비 제한 */
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* 반응형 (768px 이하) */
+@media (max-width: 768px) {
+  .experience-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  .timeline-desc {
+    width: 200px;
+  }
+  .horizontal-timeline {
+    gap: 150px;
+  }
+  .timeline-item::before {
+    left: -75px;
+    width: 150px;
   }
 }
