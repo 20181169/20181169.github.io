@@ -1,542 +1,635 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KyoungWhan's Portfolio</title>
-    <!-- preload -->
-    <link rel="preload" href="./assets/img/Grey_Icons.png" as="image">
-    <link rel="icon" href="./favicon.ico">
-    <!-- css -->
-    <link rel="stylesheet" href="./assets/css/layout.css">
-    <link rel="stylesheet" href="./assets/css/main.css">
-    <!-- gsap -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <!-- lenis -->
-    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
-    <!-- text split -->
-    <script src="https://unpkg.com/split-type"></script>
-    <!-- js -->
-    <script src="./assets/js/index.js" defer></script>
-    <!-- lottie -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.14/lottie.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KyoungWhan's Portfolio</title>
+  <!-- preload -->
+  <link rel="preload" href="./assets/img/Grey_Icons.png" as="image">
+  <link rel="icon" href="./favicon.ico">
+  <!-- css -->
+  <link rel="stylesheet" href="./assets/css/layout.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+  <!-- 모달 관련 인라인 스타일 -->
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      position: relative;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+    }
+  </style>
+  <!-- gsap -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- lenis -->
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+  <!-- text split -->
+  <script src="https://unpkg.com/split-type"></script>
+  <!-- js -->
+  <script src="./assets/js/index.js" defer></script>
+  <!-- lottie -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.14/lottie.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
-    <div class="custom-cursor">
-        <span class="blind">커스텀 커서</span>
+  <div class="custom-cursor">
+    <span class="blind">커스텀 커서</span>
+  </div>
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-quick-block">
+        <h2 class="header-tit">Quick links</h2>
+        <ul class="header-quick-list">
+          <li class="header-quick-item on"><a href="#">Home</a></li>
+          <li class="header-quick-item"><a href="https://principled-wing-27d.notion.site/Seo-Kyung-Hwan-32ed8e6d3d614a92a466e3b50182ba8f">Notion</a></li>
+          <li class="header-quick-item project-link"><a href="#">Projects</a></li>
+          <li class="header-quick-item contact-link mov hidden"><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="header-hello-block">
+        <h2 class="header-tit">Hello my name is,</h2>
+        <p>알렉산더</p>
+      </div>
+      <div class="header-contact-block">
+        <div class="status-dot">Available for new projects</div>
+        <button class="header-quick-item contact-link" role="button">Contact</button>
+      </div>
     </div>
-    <header class="header">
-        <div class="header-inner">
-            <div class="header-quick-block">
-                <h2 class="header-tit">Quick links</h2>
-                <ul class="header-quick-list">
-                    <li class="header-quick-item on"><a href="#">Home</a></li>
-                    <li class="header-quick-item"><a href="https://principled-wing-27d.notion.site/Seo-Kyung-Hwan-32ed8e6d3d614a92a466e3b50182ba8f">Notion</a></li>
-                    <li class="header-quick-item project-link"><a href="#">Projects</a></li>
-                    <li class="header-quick-item contact-link mov hidden"><a href="#">Contact</a></li>
+  </header>
+  <main>
+    <div class="main-wrapper">
+      <div class="bottom-overlay">
+        <span class="blind">하단 오버래이</span>
+      </div>
+      
+      <section class="intro-sec">
+        <div class="sticky-wrapper">
+          <div class="sticky">
+            <img src="./assets/img/intro_bg.jpg" alt="인트로 이미지">
+            <div class="intro-inner">
+              <h2 data-text="split" class="intro-tx">infinite<br class="mobile"> possibilities</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-sec">
+        <div class="about-inner">
+          <div class="about-left-block">  
+            <h2>web publisher</h2>
+            <h2>only publishing</h2>
+            <h2>always learning</h2>
+          </div>
+          <div class="about-right-block">
+            <p>가독성과 접근성을 고려한 시맨틱 마크업 작성에 주력하고 있습니다.</p>
+            <p>사용자 경험을 극대화하는 다양한 인터랙티브 웹사이트 제작에 큰 흥미를 가지고 있습니다.</p>
+            <p>React.js, SCSS, Node.js 등 다양한 외부 라이브러리를 실무에 적용하며 효율적인 개발 환경을 구축한 경험이 있습니다.</p>
+          </div>
+          <div class="lottie-block">
+            <div id="lottie" style="width: 100px; height: 100px;">
+              <span class="blind">lottie img</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="experience-sec">
+        <div class="experience-inner">
+          <h2 class="experience-title">Experiences</h2>
+          <div class="horizontal-timeline">
+            <!-- 타임라인 아이템 1 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.03 ~ 2023.10</div>
+              <h3 class="timeline-title">캡스톤 졸업 프로젝트</h3>
+              <p class="timeline-desc">
+                팀원들과 협업하여 ChatGPT를 이용한 생성형 정보 변환 기능을 만들었으며,
+                해당 프로젝트에서 프론트엔드와 퍼블리싱, 웹디자인을 담당했습니다.
+              </p>
+            </div>
+            <!-- 타임라인 아이템 2 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.02 ~ 2023.09</div>
+              <h3 class="timeline-title">아이티엘</h3>
+              <p class="timeline-desc">
+                학생연구원으로 아이티엘(주)에서 웹 퍼블리싱과 프론트엔드 업무를 배웠습니다.
+              </p>
+            </div>
+            <!-- 타임라인 아이템 3 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.01 ~ 2023.02</div>
+              <h3 class="timeline-title">동군별</h3>
+              <p class="timeline-desc">
+                전안안전 기업과 협업하여 어플리케이션 백엔드와
+                웹 백엔드 구현을 맡은 경험이 있습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.01 ~ 2023.02</div>
+              <h3 class="timeline-title">동군별</h3>
+              <p class="timeline-desc">
+                전안안전 기업과 협업하여 어플리케이션 백엔드와
+                웹 백엔드 구현을 맡은 경험이 있습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.01 ~ 2023.02</div>
+              <h3 class="timeline-title">동군별</h3>
+              <p class="timeline-desc">
+                전안안전 기업과 협업하여 어플리케이션 백엔드와
+                웹 백엔드 구현을 맡은 경험이 있습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.01 ~ 2023.02</div>
+              <h3 class="timeline-title">동군별</h3>
+              <p class="timeline-desc">
+                전안안전 기업과 협업하여 어플리케이션 백엔드와
+                웹 백엔드 구현을 맡은 경험이 있습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects-sec">
+        <span class="blind">메인 프로젝트</span>
+        <div class="projects-inner">
+          <div class="projects-tit">
+            <h2>my works</h2>
+          </div>
+          <ul class="projects-list">
+            <li class="projects-item">
+              <span class="blind">Laserbysonymusic</span>
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <img src="./assets/img/main2.jpg" alt="Laserbysonymusic 이미지">
+                </div>
+                <div class="project-tx-block">
+                  <h2 class="pj-tit">Laser<br class="mobile">bysonymusic</h2>
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#HTML5</li>
+                    <li class="pj-tag-item">#CSS</li>
+                    <li class="pj-tag-item">#JAVASCRIPT</li>
+                    <li class="pj-tag-item">#JQUERY</li>
+                    <li class="pj-tag-item">#LOTTIE</li>
+                    <li class="pj-tag-item">#LENIS</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    가로스크롤과 새로스크롤이 혼합되어 진행이되는 사이트를 제작했으며, GSAP의 scrollTrigger와 Timeline을 활용하여 더욱 심화된 애니메이션을 활용하였습니다.
+                  </h3>
+                  <a href="https://king8875.github.io/bionic/" class="btn-weblink sitelink" target="_blank">
+                    <p>Go site</p>
+                  </a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <a href="https://velog.io/@dhgh8875/laserbysonymusic" class="btn-weblink codereview" target="_blank">Code review</a>
+                </div>
+              </div>
+            </li>
+            <li class="projects-item">
+              <span class="blind">Gracy</span>
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <span class="blind">Gracy video</span>
+                  <video loop autoplay muted playsinline src="./assets/video/gracy_video.mp4"></video>
+                </div>
+                <div class="project-tx-block">
+                  <h2 class="pj-tit">Gracy</h2>
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#HTML5</li>
+                    <li class="pj-tag-item">#CSS</li>
+                    <li class="pj-tag-item">#JAVASCRIPT</li>
+                    <li class="pj-tag-item">#JQUERY</li>
+                    <li class="pj-tag-item">#LOTTIE</li>
+                    <li class="pj-tag-item">#GSAP</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    GSAP의 scrolltrigger와 lottie 애니메이션을 활용해 제작하였으며, Swiper.js를 적용하여 기능을 구현하였습니다.
+                  </h3>
+                  <a href="https://king8875.github.io/gracy/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <a href="https://velog.io/@dhgh8875/Gracy" class="btn-weblink codereview" target="_blank">Code review</a>
+                </div>
+              </div>
+            </li>
+            <li class="projects-item">
+              <span class="blind">enterprise</span>
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <span class="blind">enterprise video</span>
+                  <video loop autoplay muted playsinline src="./assets/video/ep_video.mp4"></video>
+                </div>
+                <div class="project-tx-block">
+                  <h2 class="pj-tit">Enterprise Blockchain</h2>
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#HTML5</li>
+                    <li class="pj-tag-item">#CSS</li>
+                    <li class="pj-tag-item">#JAVASCRIPT</li>
+                    <li class="pj-tag-item">#JQUERY</li>
+                    <li class="pj-tag-item">#GSAP</li>
+                    <li class="pj-tag-item">#LENIS</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    엔터프라이즈 블록체인 사이트를 클론코딩하였으며, GSAP를 활용한 다양한 애니메이션을 구현하는것에 중점을 두어서 제작하였습니다.
+                  </h3>
+                  <a href="https://king8875.github.io/enterprise/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <a href="https://velog.io/@dhgh8875/Enterprise-Blockchain" class="btn-weblink codereview" target="_blank">Code review</a>
+                </div>
+              </div>
+            </li>
+            <li class="projects-item">
+              <span class="blind">명지역길</span>
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <span class="blind">enterprise video</span>
+                  <img class="kawarock-img" src="./assets/img/kawarock.png" alt="kawarock_img">
+                </div>
+                <div class="project-tx-block">
+                  <h2 class="pj-tit">명지역길</h2>
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#Unity</li>
+                    <li class="pj-tag-item">#Django</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    충청남도일자리경제진흥원과 함께 '명지역길' 상권 활성화를 촉진하는 앱을 개발하였습니다.
+                  </h3>
+                  <a href="https://www.myeongjiyeok.com/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <a href="https://www.youtube.com/watch?v=kXSuA6JzCfU" class="btn-weblink codereview" target="_blank">YouTube</a>
+                </div>
+              </div>
+            </li>
+            <li class="projects-item">
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <img class="kukpick-img" src="./assets/img/kulpick.png" alt="kulpick_img">
+                </div>
+                <div class="project-tx-block">
+                  <!-- <h2 class="pj-tit">꿀픽[ITL]</h2> -->
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#HTML5</li>
+                    <li class="pj-tag-item">#CSS</li>
+                    <li class="pj-tag-item">#JavaScript</li>
+                    <li class="pj-tag-item">#Django</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    중기부 과제로 제작한 우리동네 골목상권의 활성화에 도움을 주는 공익적인 서비스 앱입니다.
+                    PlayStore 와 AppStore에서 다운받아 보실 수 있습니다다.
+                  </h3>
+                  <a href="https://www.ggulpick.com/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <!-- Code review 버튼은 생략 -->
+                </div>
+              </div>
+            </li>
+            <li class="projects-item">
+              <div class="projects-link">
+                <div class="project-img-block">
+                  <img class="ssg-img" src="./assets/img/banner03.jpeg" alt="suji_img">
+                </div>
+                <div class="project-tx-block">
+                  <h2 class="pj-tit">수지성당</h2>
+                  <ul class="pj-tag-list">
+                    <li class="pj-tag-item">#HTML5</li>
+                    <li class="pj-tag-item">#CSS</li>
+                    <li class="pj-tag-item">#JAVASCRIPT</li>
+                    <li class="pj-tag-item">#JQUERY</li>
+                    <li class="pj-tag-item">#GNUBOARD5</li>
+                  </ul>
+                  <h3 class="pj-subtit">
+                    그누보드를 사용하여 실제로 수지성당의 지원을 받아 게시판기능에 초점을 맞춘 웹페이지를 제작하였습니다.
+                  </h3>
+                  <a href="https://sujica.or.kr/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="#" class="btn-weblink view-details">View Details</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="sidepj-sec" data-begie="true">
+        <div class="sidepj-inner">
+          <div class="projects-tit">
+            <h2>Side Project</h2>
+            <p class="projects-tit-subtit"> 
+              사이드 프로젝트를 제작하면서 사이트 클론 코딩을 통해 시맨틱 마크업의 구조와 B-E-M 네이밍 작성법,
+              웹 접근성을 위한 다양한 방법들을 활용하는것에 대해 중점을 두며, 간단한 애니메이션과 Swiper.Js, Jquery의 응용을 통한 스크립트를 구현하였습니다.
+            </p>
+          </div>
+          <ul class="sidepj-content-list">
+            <li class="sidepj-item">
+              <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
+              <img class="sidepj-item-bg" src="./assets/img/yougin_img.jpg" alt="sideitem01">
+              <div class="sidepj-tx-block">
+                <h2 class="sidepj-item-tit">Yongin site</h2>
+                <ul class="sidepj-tag-list">
+                  <li class="sidepj-tag-item">#HTML5</li>
+                  <li class="sidepj-tag-item">#CSS</li>
+                  <li class="sidepj-tag-item">#JAVASCRIPT</li>
+                  <li class="sidepj-tag-item">#JQUERY</li>
+                  <li class="sidepj-tag-item response">#반응형</li>
                 </ul>
-            </div>
-            <div class="header-hello-block">
-                <h2 class="header-tit">Hello my name is,</h2>
-                <p>알렉산더</p>
-            </div>
-            <div class="header-contact-block">
-                <div class="status-dot">Available for new projects</div>
-                <button class="header-quick-item contact-link" role="button">Contact</button>
-            </div>
+                <div class="sidepj-subtit">
+                  <p class="sp-subtit-tx">용인특례시청 사이트를 클론 코딩을 통해 학습하였습니다. 탭기능이나 스와이퍼js를 활용한 반응형 사이트를 제작하였습니다.</p>
+                  <a href="https://king8875.github.io/yongin/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="https://velog.io/@dhgh8875/Yongin-Clone-Coding" class="btn-weblink codereview" target="_blank">Code review</a>
+                </div>
+              </div>
+            </li>
+            <li class="sidepj-item">
+              <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
+              <img class="sidepj-item-bg" src="./assets/img/naver_img.png" alt="sideitem02">
+              <div class="sidepj-tx-block">
+                <h2 class="sidepj-item-tit">Naver</h2>
+                <ul class="sidepj-tag-list">
+                  <li class="sidepj-tag-item">#HTML5</li>
+                  <li class="sidepj-tag-item">#CSS</li>
+                  <li class="sidepj-tag-item">#JAVASCRIPT</li>
+                  <li class="sidepj-tag-item">#JQUERY</li>
+                  <li class="sidepj-tag-item only-pc">#PC</li>
+                </ul>
+                <div class="sidepj-subtit">
+                  <p class="sp-subtit-tx">네이버 사이트를 클론 코딩을 통해 학습하였습니다. 시맨틱 태그를 사용한 pc사이즈를 고정으로 잡아 제작하였습니다.</p>
+                  <a href="https://king8875.github.io/naver/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="https://velog.io/@dhgh8875/Naver-Clone-Coding" class="btn-weblink codereview" target="_blank">Code review</a>
+                </div>
+              </div>
+            </li>
+            <li class="sidepj-item">
+              <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
+              <img class="sidepj-item-bg" src="./assets/img/hyundaiht.png" alt="sideitem03">
+              <div class="sidepj-tx-block">
+                <h2 class="sidepj-item-tit">HyundaiHT</h2>
+                <ul class="sidepj-tag-list">
+                  <li class="sidepj-tag-item">#HTML5</li>
+                  <li class="sidepj-tag-item">#CSS</li>
+                  <li class="sidepj-tag-item">#JAVASCRIPT</li>
+                  <li class="sidepj-tag-item">#JQUERY</li>
+                  <li class="sidepj-tag-item response">#반응형</li>
+                </ul>
+                <div class="sidepj-subtit">
+                  <p class="sp-subtit-tx">현대HT사이트를 클론 코딩을 통해 학습하였습니다. 시맨틱웹을 중점으로 작업하였으며, 반응형 웹사이트입니다.</p>
+                  <a href="https://king8875.github.io/hyundaiHT/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="https://github.com/king8875/hyundaiHT" class="btn-weblink github" target="_blank">Github</a>
+                </div>
+              </div>
+            </li>
+            <li class="sidepj-item">
+              <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
+              <img class="sidepj-item-bg" src="./assets/img/nexon-creators.png" alt="sideitem03">
+              <div class="sidepj-tx-block">
+                <h2 class="sidepj-item-tit">NexonCreators</h2>
+                <ul class="sidepj-tag-list">
+                  <li class="sidepj-tag-item">#HTML5</li>
+                  <li class="sidepj-tag-item">#SCSS</li>
+                  <li class="sidepj-tag-item">#JAVASCRIPT</li>
+                  <li class="sidepj-tag-item">#JQUERY</li>
+                  <li class="sidepj-tag-item only-pc">#PC</li>
+                </ul>
+                <div class="sidepj-subtit">
+                  <p class="sp-subtit-tx">NexonCreators사이트를 클론 코딩을 통해 학습하였습니다. pc적응형이며, 시맨틱웹을 중점으로 작업하였습니다.</p>
+                  <a href="https://king8875.github.io/nexoncreators/" class="btn-weblink sitelink" target="_blank">Go site</a>
+                  <a href="https://github.com/king8875/nexoncreators" class="btn-weblink github" target="_blank">Github</a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
-    </header>
-    <main>
-        <div class="main-wrapper">
-            <div class="bottom-overlay">
-                <span class="blind">하단 오버래이</span>
-            </div>
-            
-            <section class="intro-sec">
-                <div class="sticky-wrapper">
-                    <div class="sticky">
-                        <img src="./assets/img/intro_bg.jpg" alt="인트로 이미지">
-                        <div class="intro-inner">
-                            <h2 data-text="split" class="intro-tx">infinite<br class="mobile"> possibilities</h2>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="about-sec">
-                <div class="about-inner">
-                    <div class="about-left-block">  
-                        <h2>web publisher</h2>
-                        <h2>only publishing</h2>
-                        <h2>always learning</h2>
-                    </div>
-                    <div class="about-right-block">
-                        <p>가독성과 접근성을 고려한 시맨틱 마크업 작성에 주력하고 있습니다.</p>
-                        <p>사용자 경험을 극대화하는 다양한 인터랙티브 웹사이트 제작에 큰 흥미를 가지고 있습니다.</p>
-                        <p>React.js, SCSS, Node.js 등 다양한 외부 라이브러리를 실무에 적용하며 효율적인 개발 환경을 구축한 경험이 있습니다.</p>
-                    </div>
-                    <div class="lottie-block">
-                        <div id="lottie" style="width: 100px; height: 100px;">
-                            <span class="blind">lottie img</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="experience-sec">
-                <div class="experience-inner">
-                  <h2 class="experience-title">Experiences</h2>
-                  <div class="horizontal-timeline">
-                    <!-- 타임라인 아이템 1 -->
-                    <div class="timeline-item">
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-date">2023.03 ~ 2023.10</div>
-                      <h3 class="timeline-title">캡스톤 졸업 프로젝트</h3>
-                      <p class="timeline-desc">
-                        팀원들과 협업하여 ChatGPT를 이용한 생성형 정보 변환 기능을 만들었으며,
-                        해당 프로젝트에서 프론트엔드와 퍼블리싱, 웹디자인을 담당했습니다.
-                      </p>
-                    </div>
-                    <!-- 타임라인 아이템 2 -->
-                    <div class="timeline-item">
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-date">2023.02 ~ 2023.09</div>
-                      <h3 class="timeline-title">아이티엘</h3>
-                      <p class="timeline-desc">
-                        학생연구원으로 아이티엘(주)에서 웹 퍼블리싱과 프론트엔드 업무를 배웠습니다.
-                      </p>
-                    </div>
-                    <!-- 타임라인 아이템 3 -->
-                    <div class="timeline-item">
-                      <div class="timeline-dot"></div>
-                      <div class="timeline-date">2023.01 ~ 2023.02</div>
-                      <h3 class="timeline-title">동군별</h3>
-                      <p class="timeline-desc">
-                        전안안전 기업과 협업하여 어플리케이션 백엔드와
-                        웹 백엔드 구현을 맡은 경험이 있습니다.
-                      </p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2023.01 ~ 2023.02</div>
-                        <h3 class="timeline-title">동군별</h3>
-                        <p class="timeline-desc">
-                          전안안전 기업과 협업하여 어플리케이션 백엔드와
-                          웹 백엔드 구현을 맡은 경험이 있습니다.
-                        </p>
-                      </div>
-                      <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2023.01 ~ 2023.02</div>
-                        <h3 class="timeline-title">동군별</h3>
-                        <p class="timeline-desc">
-                          전안안전 기업과 협업하여 어플리케이션 백엔드와
-                          웹 백엔드 구현을 맡은 경험이 있습니다.
-                        </p>
-                      </div>
-                      <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2023.01 ~ 2023.02</div>
-                        <h3 class="timeline-title">동군별</h3>
-                        <p class="timeline-desc">
-                          전안안전 기업과 협업하여 어플리케이션 백엔드와
-                          웹 백엔드 구현을 맡은 경험이 있습니다.
-                        </p>
-                      </div>
-                    <!-- 필요 시 더 많은 아이템을 추가 -->
-                  </div>
-                </div>
-              </section>
-            <section class="projects-sec">
-                <span class="blind">메인 프로젝트</span>
-                <div class="projects-inner">
-                    <div class="projects-tit">
-                        <h2>my works</h2>
-                    </div>
-                    <ul class="projects-list">
-                        <li class="projects-item">
-                            <span class="blind">Laserbysonymusic</span>
-                            <div class="projects-link">
-                                <div class="project-img-block"><img src="./assets/img/main2.jpg" alt="Laserbysonymusic 이미지"></div>
-                                <div class="project-tx-block">
-                                    <h2 class="pj-tit">Laser<br class="mobile">bysonymusic</h2>
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#HTML5</li>
-                                        <li class="pj-tag-item">#CSS</li>
-                                        <li class="pj-tag-item">#JAVASCRIPT</li>
-                                        <li class="pj-tag-item">#JQUERY</li>
-                                        <li class="pj-tag-item">#LOTTIE</li>
-                                        <li class="pj-tag-item">#LENIS</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">가로스크롤과 새로스크롤이 혼합되어 진행이되는 사이트를 제작했으며, GSAP의 scrollTrigger와 Timeline을 활용하여 더욱 심화된 애니메이션을 활용하였습니다.</h3>
-                                    <a href="https://king8875.github.io/bionic/" class="btn-weblink sitelink" target="_blank"><p>Go site</p></a>
-                                    <a href="https://velog.io/@dhgh8875/laserbysonymusic" class="btn-weblink codereview" target="_blank">Code review</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="projects-item">
-                            <span class="blind">Gracy</span>
-                            <div class="projects-link">
-                                <div class="project-img-block">
-                                    <span class="blind">Gracy video</span>
-                                    <video loop autoplay muted playsinline src="./assets/video/gracy_video.mp4"></video>
-                                </div>
-                                <div class="project-tx-block">
-                                    <h2 class="pj-tit">Gracy</h2>
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#HTML5</li>
-                                        <li class="pj-tag-item">#CSS</li>
-                                        <li class="pj-tag-item">#JAVASCRIPT</li>
-                                        <li class="pj-tag-item">#JQUERY</li>
-                                        <li class="pj-tag-item">#LOTTIE</li>
-                                        <li class="pj-tag-item">#GSAP</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">GSAP의 scrolltrigger와 lottie 애니메이션을 활용해 제작하였으며, Swiper.js를 적용하여 기능을 구현하였습니다.</h3>
-                                    <a href="https://king8875.github.io/gracy/" class="btn-weblink sitelink" target="_blank">Go site</a>
-                                    <a href="https://velog.io/@dhgh8875/Gracy" class="btn-weblink codereview" target="_blank">Code review</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="projects-item">
-                            <span class="blind">enterprise</span>
-                            <div class="projects-link">
-                                <div class="project-img-block">
-                                    <span class="blind">enterprise video</span>
-                                    <video loop autoplay muted playsinline src="./assets/video/ep_video.mp4"></video>
-                                </div>
-                                <div class="project-tx-block">
-                                    <h2 class="pj-tit">Enterprise Blockchain</h2>
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#HTML5</li>
-                                        <li class="pj-tag-item">#CSS</li>
-                                        <li class="pj-tag-item">#JAVASCRIPT</li>
-                                        <li class="pj-tag-item">#JQUERY</li>
-                                        <li class="pj-tag-item">#GSAP</li>
-                                        <li class="pj-tag-item">#LENIS</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">엔터프라이즈 블록체인 사이트를 클론코딩하였으며, GSAP를 활용한 다양한 애니메이션을 구현하는것에 중점을 두어서 제작하였습니다.</h3>
-                                    <a href="https://king8875.github.io/enterprise/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://velog.io/@dhgh8875/Enterprise-Blockchain" class="btn-weblink codereview" target="_blank" >Code review</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="projects-item">
-                            <span class="blind">명지역길</span>
-                            <div class="projects-link">
-                                <div class="project-img-block">
-                                    <span class="blind">enterprise video</span>
-                                    <img class="kawarock-img" src="./assets/img/kawarock.png" alt="kawarock_img">
-                                </div>
-                                <div class="project-tx-block">
-                                    <h2 class="pj-tit">명지역길</h2>
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#Unity</li>
-                                        <li class="pj-tag-item">#Django</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">충청남도일자리경제진흥원과 함께 '명지역길' 상권 활성화를 촉진하는 앱을 개발하였습니다.</h3>
-                                    <a href="https://www.myeongjiyeok.com/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://www.youtube.com/watch?v=kXSuA6JzCfU" class="btn-weblink codereview" target="_blank" >YouTube</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="projects-item">
-                            <div class="projects-link">
-                                <div class="project-img-block">
-                                    <img class="kukpick-img" src="./assets/img/kulpick.png" alt="kulpick_img">
-                                </div>
-                                <div class="project-tx-block">
-                                    <!-- <h2 class="pj-tit">꿀픽[ITL]</h2> -->
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#HTML5</li>
-                                        <li class="pj-tag-item">#CSS</li>
-                                        <li class="pj-tag-item">#JavaScript</li>
-                                        <li class="pj-tag-item">#Django</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">중기부 과제로 제작한 우리동네 골목상권의 활성화에 도움을 주는 공익적인 서비스 앱입니다.
-                                        PlayStore 와 AppStore에서 다운받아 보실 수 있습니다다.
-                                    </h3>
-                                    <a href="https://www.ggulpick.com/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <!-- <a href="https://velog.io/@dhgh8875/Enterprise-Blockchain" class="btn-weblink codereview" target="_blank" >Code review</a> -->
-                                </div>
-                            </div>
-                        </li>
-                        <li class="projects-item">
-                            <div class="projects-link">
-                                <div class="project-img-block">
-                                    <img class="ssg-img" src="./assets/img/banner03.jpeg" alt="suji_img">
-                                </div>
-                                <div class="project-tx-block">
-                                    <h2 class="pj-tit">수지성당</h2>
-                                    <ul class="pj-tag-list">
-                                        <li class="pj-tag-item">#HTML5</li>
-                                        <li class="pj-tag-item">#CSS</li>
-                                        <li class="pj-tag-item">#JAVASCRIPT</li>
-                                        <li class="pj-tag-item">#JQUERY</li>
-                                        <li class="pj-tag-item">#GNUBOARD5</li>
-                                    </ul>
-                                    <h3 class="pj-subtit">그누보드를 사용하여 실제로 수지성당의 지원을 받아 게시판기능에 초점을 맞춘 웹페이지를 제작하였습니다.</h3>
-                                    <a href="https://sujica.or.kr/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="sidepj-sec" data-begie="true">
-                <div class="sidepj-inner">
-                    <div class="projects-tit">
-                        <h2>Side Project</h2>
-                        <p class="projects-tit-subtit"> 
-                            사이드 프로젝트를 제작하면서 사이트 클론 코딩을 통해 시맨틱 마크업의 구조와 B-E-M 네이밍 작성법,
-                            웹 접근성을 위한 다양한 방법들을 활용하는것에 대해 중점을 두며, 간단한 애니메이션과 Swiper.Js, Jquery의 응용을 통한 스크립트를 구현하었습니다.
-                        </p>
-                    </div>
-                    <ul class="sidepj-content-list">
-                        <li class="sidepj-item">
-                            <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
-                            <img class="sidepj-item-bg" src="./assets/img/yougin_img.jpg" alt="sideitem01">
-                            <div class="sidepj-tx-block">
-                                <h2 class="sidepj-item-tit">Yongin site</h2>
-                                <ul class="sidepj-tag-list">
-                                    <li class="sidepj-tag-item">#HTML5</li>
-                                    <li class="sidepj-tag-item">#CSS</li>
-                                    <li class="sidepj-tag-item">#JAVASCRIPT</li>
-                                    <li class="sidepj-tag-item">#JQUERY</li>
-                                    <li class="sidepj-tag-item response">#반응형</li>
-                                </ul>
-                                
-                                <div class="sidepj-subtit">
-                                    <p class="sp-subtit-tx">용인특례시청 사이트를 클론 코딩을 통해 학습하였습니다. 탭기능이나 스와이퍼js를 활용한 반응형 사이트를 제작하였습니다.</p>
-                                    <a href="https://king8875.github.io/yongin/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://velog.io/@dhgh8875/Yongin-Clone-Coding" class="btn-weblink codereview" target="_blank" >Code review</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="sidepj-item">
-                            <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
-                            <img class="sidepj-item-bg" src="./assets/img/naver_img.png" alt="sideitem02">
-                            <div class="sidepj-tx-block">
-                                <h2 class="sidepj-item-tit">Naver</h2>
-                                <ul class="sidepj-tag-list">
-                                    <li class="sidepj-tag-item">#HTML5</li>
-                                    <li class="sidepj-tag-item">#CSS</li>
-                                    <li class="sidepj-tag-item">#JAVASCRIPT</li>
-                                    <li class="sidepj-tag-item">#JQUERY</li>
-                                    <li class="sidepj-tag-item only-pc">#PC</li>
-                                </ul>
-                                <div class="sidepj-subtit">
-                                    <p class="sp-subtit-tx">네이버 사이트를 클론 코딩을 통해 학습하였습니다. 시맨틱 태그를 사용한 pc사이즈를 고정으로 잡아 제작하였습니다.</p>
-                                    <a href="https://king8875.github.io/naver/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://velog.io/@dhgh8875/Naver-Clone-Coding" class="btn-weblink codereview" target="_blank" >Code review</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="sidepj-item">
-                            <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
-                            <img class="sidepj-item-bg" src="./assets/img/hyundaiht.png" alt="sideitem03">
-                            <div class="sidepj-tx-block">
-                                <h2 class="sidepj-item-tit">HyundaiHT</h2>
-                                <ul class="sidepj-tag-list">
-                                    <li class="sidepj-tag-item">#HTML5</li>
-                                    <li class="sidepj-tag-item">#CSS</li>
-                                    <li class="sidepj-tag-item">#JAVASCRIPT</li>
-                                    <li class="sidepj-tag-item">#JQUERY</li>
-                                    <li class="sidepj-tag-item response">#반응형</li>
-                                </ul>
-                                <div class="sidepj-subtit">
-                                    <p class="sp-subtit-tx">현대HT사이트를 클론 코딩을 통해 학습하였습니다. 시맨틱웹을 중점으로 작업하였으며, 반응형 웹사이트입니다.</p>
-                                    <a href="https://king8875.github.io/hyundaiHT/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://github.com/king8875/hyundaiHT" class="btn-weblink github" target="_blank" >Github</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="sidepj-item">
-                            <div class="sidepj-overlay"><span class="blind">사이드 bg dimmed</span></div>
-                            <img class="sidepj-item-bg" src="./assets/img/nexon-creators.png" alt="sideitem03">
-                            <div class="sidepj-tx-block">
-                                <h2 class="sidepj-item-tit">NexonCreators</h2>
-                                <ul class="sidepj-tag-list">
-                                    <li class="sidepj-tag-item">#HTML5</li>
-                                    <li class="sidepj-tag-item">#SCSS</li>
-                                    <li class="sidepj-tag-item">#JAVASCRIPT</li>
-                                    <li class="sidepj-tag-item">#JQUERY</li>
-                                    <li class="sidepj-tag-item only-pc">#PC</li>
-                                </ul>
-                              
-                                <div class="sidepj-subtit">
-                                    <p class="sp-subtit-tx">NexonCreators사이트를 클론 코딩을 통해 학습하였습니다. pc적응형이며, 시맨틱웹을 중점으로 작업하였습니다.</p>
-                                    <a href="https://king8875.github.io/nexoncreators/" class="btn-weblink sitelink" target="_blank" >Go site</a>
-                                    <a href="https://github.com/king8875/nexoncreators" class="btn-weblink github" target="_blank" >Github</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
+      </section>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="contact-block">
+        <div class="contact-intro-block">
+          <h2 class="contact-tit">contact</h2>
         </div>
-    </main>
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="contact-block">
-                <div class="contact-intro-block">
-                    <h2 class="contact-tit">contact</h2>
-                </div>
-                <div class="contact-address-block">
-                    <div class="address-content">
-                        <h2 class="contact-name">Seo Kyoung Whan</h2>
-                        <address>
-                            <p class="email">E-Mail : dhgh8875@naver.com</p>
-                            <p class="phone">Phone : 010-6543-8875</p>
-                        </address>
-                        <div class="contact-btn-block">
-                            <a class="velog-ic" href="https://velog.io/@dhgh8875/posts">
-                                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Velog</title><path d="M3 0C1.338 0 0 1.338 0 3v18c0 1.662 1.338 3 3 3h18c1.662 0 3-1.338 3-3V3c0-1.662-1.338-3-3-3H3Zm6.883 6.25c.63 0 1.005.3 1.125.9l1.463 8.303c.465-.615.846-1.133 1.146-1.553.465-.66.893-1.418 1.283-2.273.405-.855.608-1.62.608-2.295 0-.405-.113-.727-.338-.967-.21-.255-.608-.577-1.193-.967.6-.765 1.35-1.148 2.25-1.148.48 0 .878.143 1.193.428.33.285.494.704.494 1.26 0 .93-.39 2.093-1.17 3.488-.765 1.38-2.241 3.457-4.431 6.232l-2.227.156-1.711-9.628h-2.25V7.24c.6-.195 1.305-.406 2.115-.63.81-.24 1.358-.36 1.643-.36Z"/></svg>                            </a>
-                            <a class="github-ic" href="https://github.com/king8875">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 438.549 438.549">
-                                    <path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
-                                        c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
-                                        c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
-                                        c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
-                                        c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
-                                        c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
-                                        c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
-                                        c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
-                                        c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
-                                        c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
-                                        c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
-                                        c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
-                                        c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
-                                        c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
-                                        c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
-                                        c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
-                                        c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
-                                        c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
-                                        c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
-                                        C438.536,184.851,428.728,148.168,409.132,114.573z"/>
-                                </svg>                            
-                            </a>
-                        </div>
-                        <small class="copyrights">
-                            © 2024
-                            Seo-KyoungWhan All Rights Reserved
-                        </small>
-                    </div>
-                    <div class="footer-marquee-block">
-                        <ul class="marquee-list">
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                        </ul>
-                        <ul class="marquee-list">
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                            <li class="marquee-item">
-                                <span>Contact</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="contact-address-block">
+          <div class="address-content">
+            <h2 class="contact-name">Seo Kyoung Whan</h2>
+            <address>
+              <p class="email">E-Mail : dhgh8875@naver.com</p>
+              <p class="phone">Phone : 010-6543-8875</p>
+            </address>
+            <div class="contact-btn-block">
+              <a class="velog-ic" href="https://velog.io/@dhgh8875/posts">
+                <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Velog</title><path d="M3 0C1.338 0 0 1.338 0 3v18c0 1.662 1.338 3 3 3h18c1.662 0 3-1.338 3-3V3c0-1.662-1.338-3-3-3H3Zm6.883 6.25c.63 0 1.005.3 1.125.9l1.463 8.303c.465-.615.846-1.133 1.146-1.553.465-.66.893-1.418 1.283-2.273.405-.855.608-1.62.608-2.295 0-.405-.113-.727-.338-.967-.21-.255-.608-.577-1.193-.967.6-.765 1.35-1.148 2.25-1.148.48 0 .878.143 1.193.428.33.285.494.704.494 1.26 0 .93-.39 2.093-1.17 3.488-.765 1.38-2.241 3.457-4.431 6.232l-2.227.156-1.711-9.628h-2.25V7.24c.6-.195 1.305-.406 2.115-.63.81-.24 1.358-.36 1.643-.36Z"/></svg>
+              </a>
+              <a class="github-ic" href="https://github.com/king8875">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 438.549 438.549">
+                  <path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+                    c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
+                    c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
+                    c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
+                    c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
+                    c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
+                    c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
+                    c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
+                    c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
+                    c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
+                    c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
+                    c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
+                    c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
+                    c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
+                    c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
+                    c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
+                    c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
+                    c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
+                    c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
+                    C438.536,184.851,428.728,148.168,409.132,114.573z"/>
+                </svg>
+              </a>
             </div>
+            <small class="copyrights">
+              © 2024
+              Seo-KyoungWhan All Rights Reserved
+            </small>
+          </div>
+          <div class="footer-marquee-block">
+            <ul class="marquee-list">
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+            </ul>
+            <ul class="marquee-list">
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+              <li class="marquee-item">
+                <span>Contact</span>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </footer>
+  
+  <!-- 모달 HTML 구조 -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="modalDetailContent">
+        <!-- 프로젝트 상세 내용이 로드됩니다. -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- 모달 스크립트 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var modal = document.getElementById("projectModal");
+      var closeBtn = modal.querySelector(".close");
+      var viewDetailButtons = document.querySelectorAll('.view-details');
+      
+      viewDetailButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          // 해당 프로젝트의 상세 설명(pj-subtit) 내용을 가져와 모달에 표시
+          var detailContent = this.closest('.project-tx-block').querySelector('.pj-subtit').innerHTML;
+          document.getElementById("modalDetailContent").innerHTML = detailContent;
+          modal.style.display = "block";
+        });
+      });
+      
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = "none";
+      });
+      
+      window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      });
+    });
+  </script>
 </body>
 </html>
