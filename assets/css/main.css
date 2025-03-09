@@ -46,7 +46,6 @@ body.begie {
 }
 .intro-sec .intro-inner .intro-tx .char{ transform: translateY(100%); }
 
-
 /* about section */
 .about-sec{ 
     position: relative;
@@ -220,6 +219,7 @@ body.begie {
     color: var(--beige);
     border: 1px solid var(--beige);
 }
+
 /* sidepj section */
 .sidepj-sec{ height:300vh;  }
 .sidepj-sec .sidepj-inner{
@@ -408,7 +408,7 @@ body.begie {
         height: 370vh;
         padding: 20px; 
     }
-    .sidepj-sec .projects-tit{
+    .sidepj-sec .sidepj-inner .projects-tit{
         position: relative;
         top: 0px;
         font-size: 14vw;
@@ -476,4 +476,19 @@ body.begie {
     .sidepj-sec .sidepj-inner .projects-tit h2{ font-size: 15vw; }
     .sidepj-item{ padding: 10px 10px; }
     .sidepj-tag-list .sidepj-tag-item{ padding: 4px 10px; }
+}
+
+/* -------------------------------------------------------------
+   추가 스타일: btn-weblink sitelink 에서 블록 색상을 brown으로 변경
+   (HTML에 추가 클래스 "brown"를 함께 사용)
+-------------------------------------------------------------- */
+.btn-weblink.sitelink.brown {
+    background: brown;
+    color: #fff;
+    background-size: auto;
+    background-position: initial;
+    transition: .3s;
+}
+.btn-weblink.sitelink.brown:hover {
+    background: #6b3d00;
 }
