@@ -294,27 +294,35 @@ copyrights {
    Experiences Horizontal Timeline (가로 타임라인)
 ---------------------------------- */
 .experience-sec {
-  position: relative;
-  width: 100%;
-  /* (1) 고정 높이와 오버플로 제거 (필요하다면 min-height 정도만 지정) */
-  /* height: 100vh;  <= 제거 */
-  /* overflow: hidden; <= 제거 */
+  /* (1) 만약 고정 헤더가 높이 80px이라면, 그만큼 아래로 내리기 */
+  /* margin-top: 80px; */
 
+  /* (2) 화면 크기에 맞춰 높이를 채우되, pinned 시 넘치지 않도록 */
+  /* height: 100vh; <-- GSAP pin과 함께 사용 가능 */
+  /* OR 헤더 높이만큼 뺀 값 사용 예시 */
+  height: calc(100vh - 80px);
+  margin-top: 80px;
+
+  /* (3) 배경, 레이아웃 */
+  width: 100%;
   background: #f5f5f5;
-  /* 아래처럼 섹션을 여유 있게 잡고 싶다면 min-height 사용 가능 */
-  /* min-height: 100vh; */
+  overflow: hidden;
+  /* 수직 중앙 정렬을 위해 flex 사용 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
-  margin: 0; 
-  padding: 50px 0; /* 상하 여백 */
 }
 
 .experience-inner {
-  position: relative;
+  /* pinned 상태에서 내부 콘텐츠를 세로로도 가운데 두고 싶다면
+     굳이 height: 100%가 필요하지 않습니다 */
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 30px; 
+  padding: 50px;
   box-sizing: border-box;
+  /* height: 100%; <= 제거 */
 }
 
 .experience-title {
@@ -324,13 +332,13 @@ copyrights {
   color: #222;
 }
 
-/* 실제 타임라인(가로 스크롤) */
+/* 가로 타임라인 */
 .horizontal-timeline {
   display: flex;
   align-items: center;
-  gap: 200px; /* 각 아이템 사이 간격 */
+  gap: 200px;
   position: relative;
-  width: max-content; /* 내부 아이템 개수만큼 가로로 확장 */
+  width: max-content;
   margin: 0 auto;
 }
 
@@ -356,9 +364,9 @@ copyrights {
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: 8px; /* .timeline-dot 높이의 절반 */
-  left: -100px; /* gap의 절반 */
-  width: 200px; /* gap과 동일 */
+  top: 8px;
+  left: -100px; 
+  width: 200px;
   height: 2px;
   background: #333;
   z-index: 1;
