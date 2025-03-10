@@ -81,8 +81,8 @@ body.begie {
 /* project section */
 .projects-sec{
     position: relative;
-    height: 300vh;
-    padding: 0 50px;
+    height: 230vh;
+    /* padding: 0 50px; */
 }
 .projects-inner{
     position: sticky;

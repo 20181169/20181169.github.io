@@ -10,7 +10,7 @@
   <!-- css -->
   <link rel="stylesheet" href="./assets/css/layout.css">
   <link rel="stylesheet" href="./assets/css/main.css">
-
+  
   <!-- 모달 관련 인라인 스타일 -->
   <style>
     .modal {
@@ -46,29 +46,161 @@
       text-decoration: none;
     }
   </style>
-
-  <!-- 수평 타임라인 + 스크롤 애니메이션 스타일 -->
+  
+  <!-- 수평 타임라인 + 글자 크기 조절 -->
   <style>
-    /* ========== 수평 타임라인을 위한 기본 스타일 ========== */
+    /* (1) 수평 타임라인 컨테이너 - 디자인 개선 */
+    .about-sec {
+  width: 100%;
+  padding: 1rem;              /* 기존 2rem → 1rem으로 축소 */
+  background-color: #f5f5f5;  /* 배경색은 그대로 */
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;                /* 전체 텍스트 색상(기본 #333) */
+}
+
+/* 섹션 내부를 감싸는 컨테이너 */
+.about-container {
+  max-width: 1400px;   /* 기존 1200px → 1400px (또는 1600px 등으로 더 넓게) */
+  margin: 0 auto;      
+  display: flex;
+  gap: 1rem;           /* 기존 2rem → 1rem으로 축소 */
+  flex-wrap: wrap;
+}
+
+/* 왼쪽 영역 */
+.about-left {
+  flex: 1 1 300px;    
+  max-width: 400px;
+  background-color: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  color: #333; /* 글씨 잘 보이도록 */
+}
+
+/* 프로필 사진 */
+.profile-img {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.profile-img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* 이름 스타일 */
+.profile-name {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  color: #333;
+}
+.profile-name span {
+  font-size: 1rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+/* 프로필 기본 정보 */
+.profile-info {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+.profile-info li {
+  margin-bottom: 0.3rem;
+}
+.profile-info strong {
+  display: inline-block;
+  width: 60px; 
+  color: #333;
+}
+
+/* 소개 문구 */
+.profile-desc p,
+.profile-desc ul {
+  line-height: 1.5;
+  margin: 0.5rem 0;
+  color: #333;
+}
+.profile-desc ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+.profile-desc ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* 오른쪽 영역 */
+.about-right {
+  flex: 2 1 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #333;
+}
+
+.about-right > div {
+  background-color: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+/* 공통 타이틀 스타일 (Education, Skills, Awards 등) */
+.about-right h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #007ACC;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  color: #333;
+}
+
+.about-right ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.about-right li {
+  margin-bottom: 0.5rem;
+}
+
+.awards p {
+  margin: 0.5rem 0;
+  color: #333;
+}
     .experience-sec {
+      min-height: 100vh;           /* 화면 전체 높이 */
       width: 100%;
-      overflow-x: auto; /* 가로 스크롤을 위해 */
       padding: 2rem 0;
+      display: flex;               /* 수직/수평 정렬을 위한 flex */
+      align-items: center;
+      justify-content: center;
+      background-color: #f9f9f9;   /* 살짝 연한 배경색 */
+      overflow-x: auto;            /* 가로 스크롤 */
     }
     .experience-inner {
-      /* 필요 시 최대 폭 설정 가능 */
-      min-width: 1000px; 
-      position: relative;
+      min-width: 800px; 
       margin: 0 auto;
+      position: relative;
     }
+
     .horizontal-timeline {
-      display: flex;          /* 가로 배치 */
+      display: flex;       
       align-items: center;
       position: relative;
       min-width: 100%;
-      padding: 2rem 0;
+      padding: 3rem 0;
     }
-    /* 중앙에 가로줄 표시 */
+    /* 중앙 가로줄(타임라인) */
     .horizontal-timeline::before {
       content: "";
       position: absolute;
@@ -76,52 +208,266 @@
       left: 0;
       width: 100%;
       height: 2px;
-      background-color: #ccc;
+      background-color: #ddd; /* 좀 더 연한 색 */
       transform: translateY(-50%);
       z-index: 1;
     }
-    /* 각 타임라인 아이템 */
+
+    /* (2) 타임라인 아이템 - 카드형 디자인 */
     .timeline-item {
       position: relative;
-      flex: 0 0 auto;        /* 아이템을 고정 폭으로 수평 배치 */
-      width: 250px;          /* 카드 폭 (원하는 대로 조절) */
-      margin-right: 3rem;    /* 아이템 간 간격 */
+      flex: 0 0 auto;         
+      width: 280px;           /* 카드 폭 */
+      margin-right: 3rem;
       text-align: center;
       z-index: 2;
+      
+      /* 카드 스타일 */
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      padding: 2rem 1rem;
+      transition: all 0.3s ease;
 
-      /* 아래는 애니메이션 초기 상태(왼쪽 이동 + 투명) */
+      /* 스크롤 애니메이션 초기 상태 */
       opacity: 0;
       transform: translateX(-50px);
-      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     }
-    /* 가시화된 아이템(IntersectionObserver로 show 클래스 추가) */
+
+    /* 뷰포트에 들어오면 보이는 상태 */
     .timeline-item.show {
       opacity: 1;
       transform: translateX(0);
     }
-    /* 타임라인의 점(dot) */
+
+    /* 호버 시 살짝 떠오르는 효과 */
+    .timeline-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+
+    /* (3) 텍스트 스타일 */
+    .experience-title {
+      font-size: 2rem !important;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #333;
+    }
+    .timeline-date {
+      font-size: 0.9rem !important;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #999;
+    }
+    .timeline-title {
+      font-size: 1.1rem !important;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #333;
+    }
+    .timeline-desc {
+      font-size: 0.95rem !important;
+      line-height: 1.6 !important;
+      color: #555;
+      margin: 0 1rem;
+    }
+
+    /* (4) 타임라인의 점(dot) */
     .timeline-dot {
       width: 20px;
       height: 20px;
       margin: 0 auto 1rem;
       border-radius: 50%;
-      background-color: #ff6f61;
+      background-color: #3498db; /* 예시로 파란색 */
       z-index: 3;
+      border: 3px solid #fff;    /* 도트 주변 흰색 테두리 */
+      box-shadow: 0 0 0 3px #3498db; /* 살짝 강조 */
     }
-    .timeline-date {
+    .year-block {
+        position: relative;
+        width: 20%; /* 연도 개수에 따라 조정 */
+        text-align: center;
+        z-index: 2; /* 가로선보다 위에 표시 */
+      }
+
+      .year-circle {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        line-height: 60px;
+        box-shadow: 0 0 0 4px #f9f9f9; /* 배경과 맞춰 원을 강조 */
+      }
+
+      .year-events {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+        text-align: left;
+      }
+
+      .year-events li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 20px;
+        line-height: 1.4;
+        color: #555;
+      }
+
+      .year-events li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #3498db;
+      }
+      .year-line {
+    position: relative;
+    margin: 2rem 0 3rem;
+    border-top: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  /* 연도 마커 (동그라미) */
+  .year-marker {
+    position: relative;
+  }
+
+  .year-marker::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3498db;
+  }
+
+  /* 연도 텍스트 */
+  .year-text {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  </style>
+
+  <style>
+  .JiHyeok {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      max-width: 1000px; /* 필요 시 수정 */
+    }
+    
+    /* 중앙 선(연결 라인) */
+    .JiHyeok::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #ccc;
+      z-index: -1;
+    }
+    
+    /* 개별 아이템 -> JiHyeok-item */
+    .JiHyeok-item {
+      position: relative;
+      text-align: center;
+      width: 10%; /* 개수에 따라 조절 */
+    }
+    
+    /* 동그라미(연혁 포인트) */
+    .JiHyeok-item .circle {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #007bff; /* 색상 변경 가능 */
+      border-radius: 50%;
+      background-color: #fff;
+      z-index: 1;
+    }
+    
+    /* 연도 표시 */
+    .JiHyeok-item .year {
+      margin-top: 10px;
       font-weight: bold;
-      margin-bottom: 0.5rem;
+      font-size: 16px;
+      color: #333;
     }
-    .timeline-title {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-    .timeline-desc {
-      font-size: 0.9rem;
+    
+    /* 설명 */
+    .JiHyeok-item .description {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #666;
       line-height: 1.4;
     }
   </style>
-
+  <style>
+    .gantt-chart {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+    }
+    /* 상단 헤더: 각 열은 1년(전체 8년)을 의미 */
+    .gantt-header {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      background: #f2f2f2;
+      border-bottom: 1px solid #ccc;
+    }
+    .gantt-header div {
+      padding: 10px;
+      text-align: center;
+      border-right: 1px solid #ccc;
+    }
+    .gantt-header div:last-child {
+      border-right: none;
+    }
+    /* 작업 행 */
+    .gantt-row {
+      position: relative;
+      height: 40px;
+      border-bottom: 1px solid #eee;
+    }
+    .gantt-row:last-child {
+      border-bottom: none;
+    }
+    /* 작업 바 */
+    .task-bar {
+      position: absolute;
+      height: 30px;
+      background-color: #007bff;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      top: 5px; /* 상하 여백 */
+      font-size: 14px;
+    }
+    /* 참고: 전체 폭을 100%로 보고, 1년은 12.5% (100/8) */
+  </style>
   <!-- gsap -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -185,20 +531,68 @@
 
       <!-- About 섹션 -->
       <section class="about-sec">
-        <div class="about-inner">
-          <div class="about-left-block">  
-            <h2>web publisher</h2>
-            <h2>only publishing</h2>
-            <h2>always learning</h2>
+        <div class="about-container">
+          <!-- 왼쪽 영역 -->
+          <div class="about-left">
+            <!-- 프로필 사진 -->
+            <div class="profile-img">
+              <!-- 실제 이미지 경로로 수정하세요 -->
+              <img src="images/profile.jpg" alt="Profile Photo" />
+            </div>
+            <!-- 이름, 기본 정보 -->
+            <h2 class="profile-name">
+              서민석 <span>(SEO MINSEOK)</span>
+            </h2>
+            <ul class="profile-info">
+              <li><strong>Birth:</strong> 2000.05.18</li>
+              <li><strong>Mobile:</strong> +82 10.7230.8565</li>
+              <li><strong>Email:</strong> seomin8565@gmail.com</li>
+            </ul>
+      
+            <!-- 소개 문구(이미지에서 '데이터 가치를 만드는...' 부분) -->
+            <div class="profile-desc">
+              <p>
+                데이터를 가치로 만드는 데이터 분석가 서민석입니다.
+              </p>
+              <p>
+                심리학을 전공하며 데이터 기반의 통찰력을 얻고자 데이터 분석 분야에 뛰어들었으며,
+                사람들의 행동과 마음을 숫자로 이해하는 일에 큰 흥미를 느낍니다.
+              </p>
+              <ul>
+                <li>데이터 분석에서는 폭넓은 시야를 가지고 접근합니다.</li>
+                <li>통찰과 시각화를 건드릴수록 경쟁력있는 결과물을 만듭니다.</li>
+              </ul>
+            </div>
           </div>
-          <div class="about-right-block">
-            <p>가독성과 접근성을 고려한 시맨틱 마크업 작성에 주력하고 있습니다.</p>
-            <p>사용자 경험을 극대화하는 다양한 인터랙티브 웹사이트 제작에 큰 흥미를 가지고 있습니다.</p>
-            <p>React.js, SCSS, Node.js 등 다양한 외부 라이브러리를 실무에 적용하며 효율적인 개발 환경을 구축한 경험이 있습니다.</p>
-          </div>
-          <div class="lottie-block">
-            <div id="lottie" style="width: 100px; height: 100px;">
-              <span class="blind">lottie img</span>
+      
+          <!-- 오른쪽 영역 -->
+          <div class="about-right">
+            <!-- Education -->
+            <div class="education">
+              <h3>EDUCATION</h3>
+              <ul>
+                <li>2022.09 ~ 2025.02: ○○대학교 재학 (예시)</li>
+                <li>2022.07 ~ 2022.08: DATA Science Summer Institute</li>
+                <li>2020.04 ~ 2020.08: KT AI Y.E SCHOOL(IA TREAK)</li>
+              </ul>
+            </div>
+      
+            <!-- Skill & Ability -->
+            <div class="skills">
+              <h3>SKILL & ABILITY</h3>
+              <ul>
+                <li>Pandas, Numpy를 활용한 데이터 분석</li>
+                <li>데이터 시각화 (Matplotlib, Seaborn 등)</li>
+                <li>머신러닝/딥러닝 기본 지식 (TensorFlow/Keras, PyTorch)</li>
+                <li>MySQL 활용</li>
+                <li>Git + Git-Flow 실무 경험</li>
+              </ul>
+            </div>
+      
+            <!-- Awards -->
+            <div class="awards">
+              <h3>AWARDS</h3>
+              <p>Data Science Summer Institute 우수상 수상</p>
             </div>
           </div>
         </div>
@@ -308,79 +702,108 @@
       </section>
 
       <!-- sidepj-sec 내부에 연혁(Experiences) 배치 -->
-      <section class="sidepj-sec" data-begie="true">
-        <div class="sidepj-inner">
-          <div class="projects-tit">
+      
             <!-- 수평 타임라인 섹션 -->
-            <section class="experience-sec">
-              <div class="experience-inner">
-                <h2 class="experience-title">Experiences</h2>
-                <div class="horizontal-timeline">
-                  <!-- 타임라인 아이템 1 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.03 ~ 2023.10</div>
-                    <h3 class="timeline-title">캡스톤 졸업 프로젝트</h3>
-                    <p class="timeline-desc">
-                      팀원들과 협업하여 ChatGPT를 이용한 생성형 정보 변환 기능을 만들었으며,
-                      해당 프로젝트에서 프론트엔드와 퍼블리싱, 웹디자인을 담당했습니다.
-                    </p>
-                  </div>
-                  <!-- 타임라인 아이템 2 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.02 ~ 2023.09</div>
-                    <h3 class="timeline-title">아이티엘</h3>
-                    <p class="timeline-desc">
-                      학생연구원으로 아이티엘(주)에서 웹 퍼블리싱과 프론트엔드 업무를 배웠습니다.
-                    </p>
-                  </div>
-                  <!-- 타임라인 아이템 3 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.01 ~ 2023.02</div>
-                    <h3 class="timeline-title">동군별</h3>
-                    <p class="timeline-desc">
-                      전안안전 기업과 협업하여 어플리케이션 백엔드와
-                      웹 백엔드 구현을 맡은 경험이 있습니다.
-                    </p>
-                  </div>
-                  <!-- 아이템 4 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.01 ~ 2023.02</div>
-                    <h3 class="timeline-title">동군별</h3>
-                    <p class="timeline-desc">
-                      test2
-                    </p>
-                  </div>
-                  <!-- 아이템 5 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.01 ~ 2023.02</div>
-                    <h3 class="timeline-title">동군별</h3>
-                    <p class="timeline-desc">
-                      test3
-                    </p>
-                  </div>
-                  <!-- 아이템 6 -->
-                  <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-date">2023.01 ~ 2023.02</div>
-                    <h3 class="timeline-title">동군별</h3>
-                    <p class="timeline-desc">
-                      test4
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+            
           </div>
         </div>
-      </section>
-    </div>
-  </main>
-  
+        <section class="experience-sec">
+          <div class="experience-inner">
+            <h2 class="experience-title">Experiences</h2>
+            <div class="year-line">
+              <div class="year-marker">
+                <span class="year-text">2018</span>
+              </div>
+              <div class="year-marker">
+                <span class="year-text">2025</span>
+              </div>
+              
+            </div>
+            <div class="horizontal-timeline">
+              <!-- 타임라인 아이템 1 -->
+              <!-- 타임라인 아이템 2 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2018.03 ~ 2024.02</div>
+                <h3 class="timeline-title">호서대학교</h3>
+                <p class="timeline-desc">
+                  호서대학교 컴퓨터공학과 졸업
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2022.04 ~ 2025.01</div>
+                <h3 class="timeline-title">아이티엘</h3>
+                <p class="timeline-desc">
+                  대학교 3학년부터 약 2년 6개월간 학생연구원 신분으로 아이티엘(주)에서 근무하였습니다. 크롤링을 통한 데이터 수집 자동화와 React, Node.js를 이용한 웹개발, Django로 웹앱 개발 등을 하였습니다.
+                </p>
+              </div>
+              <!-- 타임라인 아이템 3 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2022.07 ~ 2022.11</div>
+                <h3 class="timeline-title">음식 이미지 데이터셋 구축</h3>
+                <p class="timeline-desc">
+                  ‘당뇨관리 앱을 통한 음식 이미지 활용 및 환류’ 데이터셋 구축 과정에서 음식 이미지 외부 수집을 담당하였습니다.
+                  'AI-Hub'에 데이터셋이 등재되었습니다.                
+                </p>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023.04 ~ 2023.09</div>
+                <h3 class="timeline-title">지역 경제 활성화 정부 프로젝트</h3>
+                <p class="timeline-desc">
+                  코로나19 장기화로 쇠퇴하는 천안의 원도심 지역의 상권 활성화를 장려하는 프로젝트를 진행했습니다.
+                  충청남도일자리경제진흥원과 협력하였고, Unity와 Django를 이용해 상권을 ​웹툰배경의 가상현실 지도로 나타냈습니다.
+                </p>
+              </div>
+              <!-- 아이템 4 -->
+              
+              <!-- 아이템 5 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024.01 ~ 2024.05</div>
+                <h3 class="timeline-title">반려동물 진단 플랫폼 개발</h3>
+                <p class="timeline-desc">
+                  반려동물 진단, 산책, 및 훈련 일정 등을 체계적으로 관리할 수 있게 돕는 웹을 개발하였습니다.
+                  Django, JavaScript, JQuery 등으로 웹페이지를 구성하였고,
+                  프롬프트 엔지니어링과 GPT API를 활용해 반려동물 진단 기능을 구현하였습니다. 
+                </p>
+              </div>
+              <!-- 아이템 6 -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2023.09 ~ 2024.01</div>
+                <h3 class="timeline-title">꿀픽</h3>
+                <p class="timeline-desc">
+                  중소벤처기업부 과제에 선정되어 진행했던 프로젝트로,
+                  우리동네 골목상권의 활성화에 도움을 주는 공익적인 서비스를 개발하였습니다.
+                  Django와 HTML5, JavaScript를 사용하였습니다.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024.02 ~ </div>
+                <h3 class="timeline-title">스마트팜</h3>
+                <p class="timeline-desc">
+                  'Hoseo University AgTech Digital Twin Global Center' 와 기업'트윈나노' 에서 스마트팜 관련 자문연구원으로 활동하였습니다.
+                  송화버섯을 인식하고 생장단계와 수확적기를 판단하는 AI모델과 쪽파를 수확하는 로봇의 소프트웨어 개발을 담당하였습니다.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">2024.09 ~ 2025.02</div>
+                <h3 class="timeline-title">KT Aivle School</h3>
+                <p class="timeline-desc">
+                  KT와 고용노동부가 운영하는 Aivle School 교육 프로그램을 이수하였습니다. 
+                  AI/DX 혁신사례와 경험을 바탕으로한 기업 실전 프로젝트를 중심으로 기업 실무형 AI 문제를 해결하는 방법을 배웠으며, 
+                  AI, Spring Boot, HTML5, JAVA와 같은 다양한 기술스택들을 연마하였습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
   <footer class="footer">
     <div class="footer-inner">
       <div class="contact-block">
@@ -470,7 +893,8 @@
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
   
   <!-- 모달 HTML 구조 -->
   <div id="projectModal" class="modal">
@@ -516,7 +940,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const timelineItems = document.querySelectorAll('.timeline-item');
       const observerOptions = {
-        threshold: 0.5 // 요소가 50% 이상 보이면 애니메이션 시작
+        threshold: 0.4 // 요소가 40% 이상 보이면 애니메이션 시작
       };
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
