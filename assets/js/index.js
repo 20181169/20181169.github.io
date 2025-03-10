@@ -21,7 +21,7 @@ gsap.to(".horizontal-timeline", {
     trigger: ".experience-sec",
     start: "top top",
     end: () => "+=" + document.querySelector(".horizontal-timeline").scrollWidth,
-    scrub: 1.5,
+    scrub: 1,
   },
 });
 
