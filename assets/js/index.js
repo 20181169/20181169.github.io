@@ -14,15 +14,14 @@ ScrollTrigger.create({
 });
 
 gsap.to(".horizontal-timeline", {
-  // 내부 타임라인을 왼쪽으로 이동시켜 가로 스크롤 효과 구현
-  x: () => -(document.querySelector(".horizontal-timeline").scrollWidth - window.innerWidth),
+  x: "-100%",
   ease: "none",
   scrollTrigger: {
     trigger: ".experience-sec",
     start: "top top",
-    end: () => "+=" + document.querySelector(".horizontal-timeline").scrollWidth,
-    scrub: 1,
-  },
+    end: "bottom top",
+    scrub: 0.5  // 기존보다 낮은 값으로 설정하면 스크롤에 더 민감하게 반응해 애니메이션이 빠르게 진행됩니다.
+  }
 });
 
 // ----------------------------------
