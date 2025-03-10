@@ -301,27 +301,33 @@ copyrights {
    Experiences Horizontal Timeline (가로 타임라인)
 ---------------------------------- */
 .experience-sec {
+  /* 레이아웃 */
   position: relative;
   width: 100%;
-  /* height: 100vh;  <= 제거하여 스크롤 문제 해소 */
-  /* overflow: hidden; <= 제거하여 정상 스크롤 */
   background: #fafafa;
-  padding: 60px 0; /* 화면 상단/하단에 필요한 만큼 여백 */
+  
+  /* 고정 헤더가 80px 높이라 가정하고,
+     콘텐츠가 헤더 아래서 시작하도록 약간 띄움 */
+  margin-top: 80px;
+
+  /* 위아래 여백: 화면 상단/하단 간격 조정 */
+  padding: 60px 0; 
 }
 
 .experience-inner {
+  /* 가로 폭 제한 + 중앙 정렬 */
   position: relative;
   width: 100%;
-  max-width: 1200px; /* 가운데 정렬 폭 제한 */
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 30px;
   box-sizing: border-box;
 }
 
 .experience-title {
-  font-size: 3.5rem; /* 글자 크기 확대 */
+  font-size: 3.5rem;  /* 글자 크기 확대 */
   text-align: center;
-  margin-bottom: 40px; /* 타이틀과 타임라인 사이 간격 */
+  margin-bottom: 40px; 
   color: #222;
 }
 
@@ -357,9 +363,9 @@ copyrights {
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: 8px;
-  left: -50px;
-  width: 100px;
+  top: 8px;  /* 도트 수직 중앙 맞춤 */
+  left: -50px; /* gap의 절반(100px/2) */
+  width: 100px; 
   height: 2px;
   background: #222;
   z-index: 1;
@@ -372,19 +378,19 @@ copyrights {
 .timeline-date {
   margin-bottom: 10px;
   font-weight: 700;
-  font-size: 1.2rem; /* 글자 크기 조금 키움 */
+  font-size: 1.2rem;
   color: #222;
 }
 .timeline-title {
   margin-bottom: 8px;
-  font-size: 1.4rem; /* 글자 크기 조금 키움 */
+  font-size: 1.4rem;
   font-weight: 700;
   color: #222;
 }
 .timeline-desc {
-  width: 270px; /* 너비 살짝 확장 */
+  width: 270px;  /* 카드 너비 */
   text-align: center;
-  font-size: 1rem; /* 글자 크기 키움 */
+  font-size: 1rem;
   line-height: 1.5;
   color: #444;
 }
