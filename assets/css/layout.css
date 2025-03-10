@@ -303,37 +303,25 @@ copyrights {
 .experience-sec {
   position: relative;
   width: 100%;
-  height: 100vh; /* 한 화면 꽉 차도록 유지 */
+  /* height: 100vh;  <= 제거하여 스크롤 문제 해소 */
+  /* overflow: hidden; <= 제거하여 정상 스크롤 */
   background: #fafafa;
-  overflow: hidden;
-
-  /* (1) flex 컨테이너로 만들어 수직/수평 중앙 정렬 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;    /* 수평 중앙 정렬 */
-  justify-content: center; /* 수직 중앙 정렬 */
+  padding: 60px 0; /* 화면 상단/하단에 필요한 만큼 여백 */
 }
 
 .experience-inner {
-  /* (2) 내부에 높이를 강제할 필요 없으면 제거 */
-  /* height: 100%; <= 제거 */
+  position: relative;
   width: 100%;
-  max-width: 1200px; /* 중앙에 표시할 최대 폭(선택 사항) */
-  padding: 30px; 
+  max-width: 1200px; /* 가운데 정렬 폭 제한 */
+  margin: 0 auto;
+  padding: 0 30px;
   box-sizing: border-box;
-  
-  /* (3) 내부도 flex로 잡고 싶다면(선택 사항)
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  */
 }
 
 .experience-title {
-  font-size: 3rem;
+  font-size: 3.5rem; /* 글자 크기 확대 */
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px; /* 타이틀과 타임라인 사이 간격 */
   color: #222;
 }
 
@@ -343,8 +331,8 @@ copyrights {
   align-items: center;
   gap: 100px;
   position: relative;
-  width: max-content;
-  margin: 0 auto; 
+  width: max-content; 
+  margin: 0 auto;
 }
 
 /* 각 타임라인 아이템 */
@@ -384,31 +372,38 @@ copyrights {
 .timeline-date {
   margin-bottom: 10px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.2rem; /* 글자 크기 조금 키움 */
   color: #222;
 }
 .timeline-title {
   margin-bottom: 8px;
-  font-size: 1.2rem;
+  font-size: 1.4rem; /* 글자 크기 조금 키움 */
   font-weight: 700;
   color: #222;
 }
 .timeline-desc {
-  width: 250px;
+  width: 270px; /* 너비 살짝 확장 */
   text-align: center;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 1rem; /* 글자 크기 키움 */
+  line-height: 1.5;
   color: #444;
 }
 
 /* 반응형 (768px 이하) */
 @media (max-width: 768px) {
   .experience-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-bottom: 20px;
   }
+  .timeline-date {
+    font-size: 1rem;
+  }
+  .timeline-title {
+    font-size: 1.2rem;
+  }
   .timeline-desc {
-    width: 200px;
+    width: 220px;
+    font-size: 0.9rem;
   }
   .horizontal-timeline {
     gap: 80px;
