@@ -14,14 +14,17 @@ ScrollTrigger.create({
 });
 
 gsap.to(".horizontal-timeline", {
-  // 내부 타임라인을 왼쪽으로 이동시켜 가로 스크롤 효과 구현
   x: () => -(document.querySelector(".horizontal-timeline").scrollWidth - window.innerWidth),
   ease: "none",
   scrollTrigger: {
     trigger: ".experience-sec",
     start: "top top",
-    end: () => "+=" + document.querySelector(".horizontal-timeline").scrollWidth,
+    // (2) end를 '전체 스크롤해야 할 거리'로 설정
+    end: () => "+=" + (document.querySelector(".horizontal-timeline").scrollWidth - window.innerWidth),
     scrub: 1,
+    pin: true,              // 섹션을 고정
+    pinSpacing: true,       // (중요) 고정되는 동안 섹션 아래 공간을 확보
+    invalidateOnRefresh: true,
   },
 });
 
