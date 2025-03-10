@@ -10,6 +10,7 @@
   <!-- css -->
   <link rel="stylesheet" href="./assets/css/layout.css">
   <link rel="stylesheet" href="./assets/css/main.css">
+
   <!-- 모달 관련 인라인 스타일 -->
   <style>
     .modal {
@@ -45,20 +46,82 @@
       text-decoration: none;
     }
   </style>
-  <!-- 타임라인 스크롤 애니메이션 스타일 -->
+
+  <!-- 수평 타임라인 + 스크롤 애니메이션 스타일 -->
   <style>
-    /* 타임라인 애니메이션 초기 상태: 왼쪽에서 치우치고 투명함 */
+    /* ========== 수평 타임라인을 위한 기본 스타일 ========== */
+    .experience-sec {
+      width: 100%;
+      overflow-x: auto; /* 가로 스크롤을 위해 */
+      padding: 2rem 0;
+    }
+    .experience-inner {
+      /* 필요 시 최대 폭 설정 가능 */
+      min-width: 1000px; 
+      position: relative;
+      margin: 0 auto;
+    }
+    .horizontal-timeline {
+      display: flex;          /* 가로 배치 */
+      align-items: center;
+      position: relative;
+      min-width: 100%;
+      padding: 2rem 0;
+    }
+    /* 중앙에 가로줄 표시 */
+    .horizontal-timeline::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #ccc;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+    /* 각 타임라인 아이템 */
     .timeline-item {
+      position: relative;
+      flex: 0 0 auto;        /* 아이템을 고정 폭으로 수평 배치 */
+      width: 250px;          /* 카드 폭 (원하는 대로 조절) */
+      margin-right: 3rem;    /* 아이템 간 간격 */
+      text-align: center;
+      z-index: 2;
+
+      /* 아래는 애니메이션 초기 상태(왼쪽 이동 + 투명) */
       opacity: 0;
       transform: translateX(-50px);
       transition: transform 0.5s ease-out, opacity 0.5s ease-out;
     }
-    /* 요소가 뷰포트에 들어오면 제자리로 이동하면서 보임 */
+    /* 가시화된 아이템(IntersectionObserver로 show 클래스 추가) */
     .timeline-item.show {
       opacity: 1;
       transform: translateX(0);
     }
+    /* 타임라인의 점(dot) */
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background-color: #ff6f61;
+      z-index: 3;
+    }
+    .timeline-date {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
   </style>
+
   <!-- gsap -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -77,13 +140,16 @@
   <div class="custom-cursor">
     <span class="blind">커스텀 커서</span>
   </div>
+
   <header class="header">
     <div class="header-inner">
       <div class="header-quick-block">
         <h2 class="header-tit">Quick links</h2>
         <ul class="header-quick-list">
           <li class="header-quick-item on"><a href="#">Home</a></li>
-          <li class="header-quick-item"><a href="https://principled-wing-27d.notion.site/Seo-Kyung-Hwan-32ed8e6d3d614a92a466e3b50182ba8f">Notion</a></li>
+          <li class="header-quick-item">
+            <a href="https://principled-wing-27d.notion.site/Seo-Kyung-Hwan-32ed8e6d3d614a92a466e3b50182ba8f">Notion</a>
+          </li>
           <li class="header-quick-item project-link"><a href="#">Projects</a></li>
           <li class="header-quick-item contact-link mov hidden"><a href="#">Contact</a></li>
         </ul>
@@ -98,12 +164,14 @@
       </div>
     </div>
   </header>
+
   <main>
     <div class="main-wrapper">
       <div class="bottom-overlay">
         <span class="blind">하단 오버래이</span>
       </div>
       
+      <!-- 인트로 섹션 -->
       <section class="intro-sec">
         <div class="sticky-wrapper">
           <div class="sticky">
@@ -115,6 +183,7 @@
         </div>
       </section>
 
+      <!-- About 섹션 -->
       <section class="about-sec">
         <div class="about-inner">
           <div class="about-left-block">  
@@ -135,67 +204,7 @@
         </div>
       </section>
 
-      <section class="experience-sec">
-        <div class="experience-inner">
-          <h2 class="experience-title">Experiences</h2>
-          <div class="horizontal-timeline">
-            <!-- 타임라인 아이템 1 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.03 ~ 2023.10</div>
-              <h3 class="timeline-title">캡스톤 졸업 프로젝트</h3>
-              <p class="timeline-desc">
-                팀원들과 협업하여 ChatGPT를 이용한 생성형 정보 변환 기능을 만들었으며,
-                해당 프로젝트에서 프론트엔드와 퍼블리싱, 웹디자인을 담당했습니다.
-              </p>
-            </div>
-            <!-- 타임라인 아이템 2 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.02 ~ 2023.09</div>
-              <h3 class="timeline-title">아이티엘</h3>
-              <p class="timeline-desc">
-                학생연구원으로 아이티엘(주)에서 웹 퍼블리싱과 프론트엔드 업무를 배웠습니다.
-              </p>
-            </div>
-            <!-- 타임라인 아이템 3 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.01 ~ 2023.02</div>
-              <h3 class="timeline-title">동군별</h3>
-              <p class="timeline-desc">
-                전안안전 기업과 협업하여 어플리케이션 백엔드와
-                웹 백엔드 구현을 맡은 경험이 있습니다.
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.01 ~ 2023.02</div>
-              <h3 class="timeline-title">동군별</h3>
-              <p class="timeline-desc">
-                test2
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.01 ~ 2023.02</div>
-              <h3 class="timeline-title">동군별</h3>
-              <p class="timeline-desc">
-                test3
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.01 ~ 2023.02</div>
-              <h3 class="timeline-title">동군별</h3>
-              <p class="timeline-desc">
-                test4
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      <!-- Projects 섹션 -->
       <section class="projects-sec">
         <span class="blind">메인 프로젝트</span>
         <div class="projects-inner">
@@ -279,7 +288,6 @@
                   <img class="kukpick-img" src="./assets/img/kulpick.png" alt="kulpick_img">
                 </div>
                 <div class="project-tx-block">
-                  <!-- <h2 class="pj-tit">꿀픽[ITL]</h2> -->
                   <ul class="pj-tag-list">
                     <li class="pj-tag-item">#HTML5</li>
                     <li class="pj-tag-item">#CSS</li>
@@ -292,20 +300,82 @@
                   </h3>
                   <a href="https://www.ggulpick.com/" class="btn-weblink sitelink" target="_blank">Go site</a>
                   <a href="https://www.notion.so/1b079dc5e31e81eeb3b1dc9e957f50e4" class="btn-weblink codereview" target="_blank">View Details</a>
-                  <!-- Code review 버튼은 생략 -->
                 </div>
               </div>
             </li>
-            
           </ul>
         </div>
       </section>
 
+      <!-- sidepj-sec 내부에 연혁(Experiences) 배치 -->
       <section class="sidepj-sec" data-begie="true">
         <div class="sidepj-inner">
           <div class="projects-tit">
+            <!-- 수평 타임라인 섹션 -->
+            <section class="experience-sec">
+              <div class="experience-inner">
+                <h2 class="experience-title">Experiences</h2>
+                <div class="horizontal-timeline">
+                  <!-- 타임라인 아이템 1 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.03 ~ 2023.10</div>
+                    <h3 class="timeline-title">캡스톤 졸업 프로젝트</h3>
+                    <p class="timeline-desc">
+                      팀원들과 협업하여 ChatGPT를 이용한 생성형 정보 변환 기능을 만들었으며,
+                      해당 프로젝트에서 프론트엔드와 퍼블리싱, 웹디자인을 담당했습니다.
+                    </p>
+                  </div>
+                  <!-- 타임라인 아이템 2 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.02 ~ 2023.09</div>
+                    <h3 class="timeline-title">아이티엘</h3>
+                    <p class="timeline-desc">
+                      학생연구원으로 아이티엘(주)에서 웹 퍼블리싱과 프론트엔드 업무를 배웠습니다.
+                    </p>
+                  </div>
+                  <!-- 타임라인 아이템 3 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.01 ~ 2023.02</div>
+                    <h3 class="timeline-title">동군별</h3>
+                    <p class="timeline-desc">
+                      전안안전 기업과 협업하여 어플리케이션 백엔드와
+                      웹 백엔드 구현을 맡은 경험이 있습니다.
+                    </p>
+                  </div>
+                  <!-- 아이템 4 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.01 ~ 2023.02</div>
+                    <h3 class="timeline-title">동군별</h3>
+                    <p class="timeline-desc">
+                      test2
+                    </p>
+                  </div>
+                  <!-- 아이템 5 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.01 ~ 2023.02</div>
+                    <h3 class="timeline-title">동군별</h3>
+                    <p class="timeline-desc">
+                      test3
+                    </p>
+                  </div>
+                  <!-- 아이템 6 -->
+                  <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023.01 ~ 2023.02</div>
+                    <h3 class="timeline-title">동군별</h3>
+                    <p class="timeline-desc">
+                      test4
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-          
         </div>
       </section>
     </div>
@@ -329,7 +399,7 @@
                 <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Velog</title><path d="M3 0C1.338 0 0 1.338 0 3v18c0 1.662 1.338 3 3 3h18c1.662 0 3-1.338 3-3V3c0-1.662-1.338-3-3-3H3Zm6.883 6.25c.63 0 1.005.3 1.125.9l1.463 8.303c.465-.615.846-1.133 1.146-1.553.465-.66.893-1.418 1.283-2.273.405-.855.608-1.62.608-2.295 0-.405-.113-.727-.338-.967-.21-.255-.608-.577-1.193-.967.6-.765 1.35-1.148 2.25-1.148.48 0 .878.143 1.193.428.33.285.494.704.494 1.26 0 .93-.39 2.093-1.17 3.488-.765 1.38-2.241 3.457-4.431 6.232l-2.227.156-1.711-9.628h-2.25V7.24c.6-.195 1.305-.406 2.115-.63.81-.24 1.358-.36 1.643-.36Z"/></svg>
               </a>
               <a class="github-ic" href="https://github.com/king8875">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 438.549 438.549">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 438.549 438.549">
                   <path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
                     c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
                     c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
@@ -360,114 +430,47 @@
           </div>
           <div class="footer-marquee-block">
             <ul class="marquee-list">
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
             </ul>
             <ul class="marquee-list">
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
-              <li class="marquee-item">
-                <span>Contact</span>
-              </li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
+              <li class="marquee-item"><span>Contact</span></li>
             </ul>
           </div>
         </div>
-      </footer>
+      </div>
+    </footer>
   
   <!-- 모달 HTML 구조 -->
   <div id="projectModal" class="modal">
@@ -519,7 +522,7 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('show');
-            observer.unobserve(entry.target); // 한 번 애니메이션 적용 후 관찰 중단
+            observer.unobserve(entry.target);
           }
         });
       }, observerOptions);
