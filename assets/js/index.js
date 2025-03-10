@@ -20,7 +20,7 @@ gsap.to(".horizontal-timeline", {
     trigger: ".experience-sec",
     start: "top top",
     end: "bottom top",
-    scrub: 0.5  // 기존보다 낮은 값으로 설정하면 스크롤에 더 민감하게 반응해 애니메이션이 빠르게 진행됩니다.
+    scrub: 0.9  // 기존보다 낮은 값으로 설정하면 스크롤에 더 민감하게 반응해 애니메이션이 빠르게 진행됩니다.
   }
 });
 
