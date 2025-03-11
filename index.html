@@ -51,132 +51,134 @@
   <style>
     /* (1) 수평 타임라인 컨테이너 - 디자인 개선 */
     .about-sec {
-  width: 100%;
-  padding: 1rem;              /* 기존 2rem → 1rem으로 축소 */
-  background-color: #f5f5f5;  /* 배경색은 그대로 */
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #333;                /* 전체 텍스트 색상(기본 #333) */
-}
+      width: 100%;
+      padding: 1rem;              /* 기존 2rem → 1rem으로 축소 */
+      background-color: #f5f5f5;  /* 배경색은 그대로 */
+      box-sizing: border-box;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #333;                /* 전체 텍스트 색상(기본 #333) */
+    }
 
-/* 섹션 내부를 감싸는 컨테이너 */
-.about-container {
-  max-width: 1400px;   /* 기존 1200px → 1400px (또는 1600px 등으로 더 넓게) */
-  margin: 0 auto;      
-  display: flex;
-  gap: 1rem;           /* 기존 2rem → 1rem으로 축소 */
-  flex-wrap: wrap;
-}
+    /* 섹션 내부를 감싸는 컨테이너 */
+    .about-container {
+      max-width: 1400px;   /* 기존 1200px → 1400px (또는 1600px 등으로 더 넓게) */
+      margin: 0 auto;      
+      display: flex;
+      gap: 1rem;           /* 기존 2rem → 1rem으로 축소 */
+      flex-wrap: wrap;
+    }
 
-/* 왼쪽 영역 */
-.about-left {
-  flex: 1 1 300px;    
-  max-width: 400px;
-  background-color: #fff;
-  padding: 1.5rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  border-radius: 8px;
-  color: #333; /* 글씨 잘 보이도록 */
-}
+    /* 왼쪽 영역 */
+    .about-left {
+      flex: 1 1 300px;    
+      max-width: 400px;
+      background-color: #fff;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      color: #333; /* 글씨 잘 보이도록 */
+    }
 
-/* 프로필 사진 */
-.profile-img {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.profile-img img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-}
+    /* 프로필 사진 */
+    .profile-img {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .profile-img img {
+      display: block;      /* 블록 요소로 변경 */
+      margin: 0 auto;      /* 좌우 자동 여백 = 가운데 정렬 */
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
 
-/* 이름 스타일 */
-.profile-name {
-  font-size: 1.5rem;
-  margin: 0.5rem 0;
-  text-align: center;
-  color: #333;
-}
-.profile-name span {
-  font-size: 1rem;
-  color: #666;
-  margin-left: 0.5rem;
-}
+    /* 이름 스타일 */
+    .profile-name {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      text-align: center;
+      color: #333;
+    }
+    .profile-name span {
+      font-size: 1rem;
+      color: #666;
+      margin-left: 0.5rem;
+    }
 
-/* 프로필 기본 정보 */
-.profile-info {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  font-size: 0.95rem;
-  color: #333;
-}
-.profile-info li {
-  margin-bottom: 0.3rem;
-}
-.profile-info strong {
-  display: inline-block;
-  width: 60px; 
-  color: #333;
-}
+    /* 프로필 기본 정보 */
+    .profile-info {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .profile-info li {
+      margin-bottom: 0.3rem;
+    }
+    .profile-info strong {
+      display: inline-block;
+      width: 60px; 
+      color: #333;
+    }
 
-/* 소개 문구 */
-.profile-desc p,
-.profile-desc ul {
-  line-height: 1.5;
-  margin: 0.5rem 0;
-  color: #333;
-}
-.profile-desc ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-}
-.profile-desc ul li {
-  margin-bottom: 0.5rem;
-}
+    /* 소개 문구 */
+    .profile-desc p,
+    .profile-desc ul {
+      line-height: 1.5;
+      margin: 0.5rem 0;
+      color: #333;
+    }
+    .profile-desc ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+    }
+    .profile-desc ul li {
+      margin-bottom: 0.5rem;
+    }
 
-/* 오른쪽 영역 */
-.about-right {
-  flex: 2 1 600px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  color: #333;
-}
+    /* 오른쪽 영역 */
+    .about-right {
+      flex: 2 1 600px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      color: #333;
+    }
 
-.about-right > div {
-  background-color: #fff;
-  padding: 1.5rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  border-radius: 8px;
-}
+    .about-right > div {
+      background-color: #fff;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+    }
 
-/* 공통 타이틀 스타일 (Education, Skills, Awards 등) */
-.about-right h3 {
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
-  border-bottom: 2px solid #007ACC;
-  display: inline-block;
-  padding-bottom: 0.3rem;
-  color: #333;
-}
+    /* 공통 타이틀 스타일 (Education, Skills, Awards 등) */
+    .about-right h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      border-bottom: 2px solid #007ACC;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+      color: #333;
+    }
 
-.about-right ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-  line-height: 1.5;
-  color: #333;
-}
+    .about-right ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+      line-height: 1.5;
+      color: #333;
+    }
 
-.about-right li {
-  margin-bottom: 0.5rem;
-}
+    .about-right li {
+      margin-bottom: 0.5rem;
+    }
 
-.awards p {
-  margin: 0.5rem 0;
-  color: #333;
-}
+    .awards p {
+      margin: 0.5rem 0;
+      color: #333;
+    }
     .experience-sec {
       min-height: 100vh;           /* 화면 전체 높이 */
       width: 100%;
@@ -195,7 +197,7 @@
 
     .horizontal-timeline {
       display: flex;       
-      align-items: center;
+      align-items: center; /* 박스 높이 맞춤을 위해 여기서 stretch로 바꿔도 가능 */
       position: relative;
       min-width: 100%;
       padding: 3rem 0;
@@ -216,13 +218,12 @@
     /* (2) 타임라인 아이템 - 카드형 디자인 */
     .timeline-item {
       position: relative;
-      flex: 0 0 auto;         
-      width: 280px;           /* 카드 폭 */
+      flex: 0 0 auto;
+      width: 280px;
       margin-right: 3rem;
       text-align: center;
       z-index: 2;
-      
-      /* 카드 스타일 */
+
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 8px 15px rgba(0,0,0,0.1);
@@ -232,6 +233,13 @@
       /* 스크롤 애니메이션 초기 상태 */
       opacity: 0;
       transform: translateX(-50px);
+
+      /* 네모박스 높이 통일 및 중앙 정렬 */
+      min-height: 370px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 수직 중앙 정렬 */
+      align-items: center;     /* 수평 중앙 정렬 */
     }
 
     /* 뷰포트에 들어오면 보이는 상태 */
@@ -285,86 +293,86 @@
       box-shadow: 0 0 0 3px #3498db; /* 살짝 강조 */
     }
     .year-block {
-        position: relative;
-        width: 20%; /* 연도 개수에 따라 조정 */
-        text-align: center;
-        z-index: 2; /* 가로선보다 위에 표시 */
-      }
+      position: relative;
+      width: 20%; /* 연도 개수에 따라 조정 */
+      text-align: center;
+      z-index: 2; /* 가로선보다 위에 표시 */
+    }
 
-      .year-circle {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 1rem;
-        border-radius: 50%;
-        background-color: #3498db;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1rem;
-        line-height: 60px;
-        box-shadow: 0 0 0 4px #f9f9f9; /* 배경과 맞춰 원을 강조 */
-      }
+    .year-circle {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background-color: #3498db;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      line-height: 60px;
+      box-shadow: 0 0 0 4px #f9f9f9; /* 배경과 맞춰 원을 강조 */
+    }
 
-      .year-events {
-        list-style: none;
-        padding: 0;
-        margin-top: 1rem;
-        text-align: left;
-      }
+    .year-events {
+      list-style: none;
+      padding: 0;
+      margin-top: 1rem;
+      text-align: left;
+    }
 
-      .year-events li {
-        margin-bottom: 0.5rem;
-        position: relative;
-        padding-left: 20px;
-        line-height: 1.4;
-        color: #555;
-      }
+    .year-events li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 20px;
+      line-height: 1.4;
+      color: #555;
+    }
 
-      .year-events li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: #3498db;
-      }
-      .year-line {
-    position: relative;
-    margin: 2rem 0 3rem;
-    border-top: 2px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-  }
+    .year-events li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #3498db;
+    }
+    .year-line {
+      position: relative;
+      margin: 2rem 0 3rem;
+      border-top: 2px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
 
-  /* 연도 마커 (동그라미) */
-  .year-marker {
-    position: relative;
-  }
+    /* 연도 마커 (동그라미) */
+    .year-marker {
+      position: relative;
+    }
 
-  .year-marker::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #3498db;
-  }
+    .year-marker::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #3498db;
+    }
 
-  /* 연도 텍스트 */
-  .year-text {
-    margin-top: 10px;
-    display: block;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #333;
-  }
+    /* 연도 텍스트 */
+    .year-text {
+      margin-top: 10px;
+      display: block;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #333;
+    }
   </style>
 
   <style>
-  .JiHyeok {
+    .JiHyeok {
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -466,7 +474,123 @@
       top: 5px; /* 상하 여백 */
       font-size: 14px;
     }
-    /* 참고: 전체 폭을 100%로 보고, 1년은 12.5% (100/8) */
+    .awards-sec {
+      padding: 2rem;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
+
+    .awards-sec h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    /* Grid 레이아웃 컨테이너 */
+    .awards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem; /* 카드 간 간격 */
+    }
+
+    /* 개별 카드 스타일 */
+    .award-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* 이미지 영역 */
+    .award-image img {
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    /* 설명 영역 */
+    .award-description h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .award-description ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+      color: #555;
+    }
+    .award-description li {
+      margin-bottom: 0.3rem;
+    }
+    .awards-section {
+      margin-top: 2rem;
+    }
+
+    /* 섹션 타이틀 */
+    .awards-section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    /* 2열 x 3행 (총 6개) Grid 레이아웃 */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: 1.5rem;
+    }
+
+    /* 개별 아이템 카드 */
+    .award-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* 이미지 */
+    .award-image img {
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    /* 설명 */
+    .award-description h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .award-description ul {
+      list-style: disc;
+      margin-left: 1.5rem;
+      color: #555;
+      line-height: 1.4;
+    }
+    .award-description li {
+      margin-bottom: 0.3rem;
+    }
   </style>
   <!-- gsap -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -537,16 +661,16 @@
             <!-- 프로필 사진 -->
             <div class="profile-img">
               <!-- 실제 이미지 경로로 수정하세요 -->
-              <img src="images/profile.jpg" alt="Profile Photo" />
+              <img src="./assets/img/alex.jpg" alt="Profile Photo" />
             </div>
             <!-- 이름, 기본 정보 -->
             <h2 class="profile-name">
-              서민석 <span>(SEO MINSEOK)</span>
+              박지혁 <span>(Park JiHyeok)</span>
             </h2>
             <ul class="profile-info">
-              <li><strong>Birth:</strong> 2000.05.18</li>
-              <li><strong>Mobile:</strong> +82 10.7230.8565</li>
-              <li><strong>Email:</strong> seomin8565@gmail.com</li>
+              <li><strong>Birth:</strong> 1998.11.09</li>
+              <li><strong>Mobile:</strong> +82 10.4492.0802</li>
+              <li><strong>Email:</strong> peter110998@naver.com</li>
             </ul>
       
             <!-- 소개 문구(이미지에서 '데이터 가치를 만드는...' 부분) -->
@@ -591,11 +715,123 @@
       
             <!-- Awards -->
             <div class="awards">
-              <h3>AWARDS</h3>
-              <p>Data Science Summer Institute 우수상 수상</p>
+              <h3>CERTIFICATES</h3>
+              <p>정보처리기사 (2024. 06.18 취득)</p>
             </div>
           </div>
         </div>
+      </section>
+
+      <section class="awards-sec">
+        <!-- 하단 영역: 2개씩 3줄 (총 6개) -->
+        <div class="awards-section">
+          <h2>대외활동 & 수상내역</h2>
+          <div class="awards-grid">
+            <!-- 1 -->
+            <div class="award-item">
+              <div class="award-image">
+                <!-- 실제 이미지 경로로 수정 -->
+                <img src="./assets/img/제2회한국어AI경진대회.jpg" alt="certificate 1" />
+              </div>
+              <div class="award-description">
+                <h3>제2회한국어AI경진대회 (특별상)</h3>
+                <ul>
+                  <li>활동기간: 2021.01 ~ 2021.06</li>
+                  <li>주최: 통계청</li>
+                  <li>활동내용: JSON 형식으로 된 한국어 문장들을 가공하여 학습에 용이한 상태로 변환하기, 또 푸리에 고속변환을 사용하여 
+                    wav파일을 주파수 형태로 출력하는 등 데이터 전처리와 Baseline 코드를 이용한 음성인식 AI모델을 개발하였습니다.</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- 2 -->
+            <div class="award-item">
+              <div class="award-image">
+                <img src="./assets/img/Heart&Lung.jpg" alt="certificate 2" />
+              </div>
+              <div class="award-description">
+                <h3>Heart & Lung Sound AI Challenge (최우수상)</h3>
+                <ul>
+                  <li>활동기간: 2022.01 ~ 2022.06</li>
+                  <li>주최: 한국지능정보사회진흥원</li>
+                  <li>활동내용: Audio Super-Resolution 기술을 활용하여 Heart&Lung Sound데이터에서 1Hz, 1msec의 해상도로  주파수를 추출함으로써, 기존 저해상도 추출 과정에서 발생하는 정보손실로 인한 Heart&Lung Detect 인식 성능향상으로 정확한 판별을 할 수 있도록 하였습니다.  데이터의 전처리 과정으로 
+                    Downsamlping과 Upsampling을 사용하며, 보다 높은 데이터의 해상도를 높이기위해 Upsampling Block을 두배로 사용하였습니다.</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- 3 -->
+            <div class="award-item">
+              <div class="award-image">
+                <img src="./assets/img/2022소아엑스레이데이터과제.jpg" alt="certificate 3" />
+              </div>
+              <div class="award-description">
+                <h3>2022 소아 엑스레이 데이터 과제 서비스 아이디어 개발 챌린지 (우수상)</h3>
+                <ul>
+                  <li>활동기간: 2024.01 ~ 2024.12</li>
+                  <li>주최: 고려대학교 산학협력단</li>
+                  <li>활동내용: Super-Resolution 알고리즘을 활용하여 엑스레이 데이터 중 판별하기 어려운 상황(저조도/노이즈 포함)에 대해 분석하여 정확한 분류와 보조, 다양한 결과에 대한 예측 정확도를 높이고자 하였습니다. 
+                    SRGAN을 사용하여 입력받은 낮은 해상도의 이미지를 높은 해상도로 생성하도록 하였습니다.</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- 4 -->
+            <div class="award-item">
+              <div class="award-image">
+                <img src="./assets/img/객체추적.jpg" alt="certificate 4" />
+              </div>
+              <div class="award-description">
+                <h3>객체 추적 및 추정 데이터, 인공지능 학습용 데이터 활용 및 서비스 경진대회 (우수상)</h3>
+                <ul>
+                  <li>수상일자: 2024.11.19</li>
+                  <li>주최: (주)미디어그룹사람과숲</li>
+                  <li>활동내용: Super-Resolution 알고리즘을 활용하여 영상 데이터 중 판별하기 어려운 상황(저조도/노이즈 포함)에 대해 분석하여 안전사고/범죄상황 예측 정확도를 높이고 현장 경보 송출 및 관리자 알림을 제공하여 사고 예방/신속대응이 가능한 시스템을 개발하고자 하였습니다.  
+                    핵심기술로 SRGAN을 활용하여 영상 화질을 개선시켰습니다. </li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- 5 -->
+            <div class="award-item">
+              <div class="award-image">
+                <img src="./assets/img/2023헬쑥해여.png" alt="certificate 5" />
+              </div>
+              <h3> </h3>
+              <h3> </h3>
+              <h3> </h3>
+              <h3> </h3>
+              <h3> </h3>
+              <div class="award-description">
+                <h3>2023 헬스케어 AI경진대회 (입상)</h3>
+                <ul>
+                  <li>수상일자: 2023.09.01</li>
+                  <li>주최: 서울대학교치과병원</li>
+                  <li>활동내용: 데이터셋 전처리 방법으로 이미지 데이터와 JSON형식의 라벨 데이터를 입력받아, 이미지를 이진 분류 라벨 (0 또는 1)로 변환하였습니다. 모델 학습 과정으로 TensorFlow를 사용하여 간단한 컨볼루션 신경망(CNN) 모델을 정의하고 훈련하는데 사용하며 Conv2D로 이미지의 특징을 추출하였고, MaxPooling2D로이미지를 다운샘플링하며 계산 비용을 줄였습니다. 또 Dropout을 사용하여 일부 뉴런을 비활성화하여 과적합을 방지하였습니다. 
+                    최종적으로 테스트 데이터 3000개에 대하여 sklearn.metrics.f1_score를 사용하여 f1_score 출력하였습니다.</li>
+                </ul>
+              </div>
+            </div>
+      
+            <!-- 6 -->
+            <div class="award-item">
+              <div class="award-image">
+                <img src="./assets/img/에이블상장.jpg" alt="certificate 6" />
+              </div>
+              <div class="award-description">
+                <h3>AIVLE Big Project Collaboration상</h3>
+                <ul>
+                  <li>수상일자: 2023.05.10</li>
+                  <li>주최: KT & 고용노동부</li>
+                  <li>활동내용: KT와 고용노동부가 운영하는 Aivle School 교육 프로그램을 이수하면서 진행했던 프로젝트 입니다. 
+                    비바리퍼블리카(Toss)를 겨냥한 B2B 프로젝트로, 최재호 신임대표가 공표한 “2년간 토스플레이스 단말기 보급 10배 확대” 목표에 맞게 토스 단말기를 사용할 시 
+                    자영업자가 얻는 이득을 극대화 할 수 있다는 이점을 앞세워,  보급률을 늘릴 수 있도록 유도하는 앱을 개발하였습니다.
+                    SpringBoot, React, FastAPI, Docker, Azure 등과 같은 기술스택들을 사용하였습니다.</li>
+                </ul>
+              </div>
+            </div>
+          </div> <!-- end .awards-grid -->
+        
       </section>
 
       <!-- Projects 섹션 -->
@@ -624,7 +860,7 @@
                     에이블스쿨 수료. 빅프로젝트
                   </h3>
                   <a href="https://sujica.or.kr/" class="btn-weblink sitelink" target="_blank">Go site</a>
-                  <a href="#" class="btn-weblink view-details">View Details</a>
+                  <a href="https://invited-note-640.notion.site/Toss-Beneface-1b079dc5e31e81b080b3f434df36254d" class="btn-weblink codereview" target="_blank">View Details</a>
                 </div>
               </div>
             </li>
@@ -701,109 +937,94 @@
         </div>
       </section>
 
-      <!-- sidepj-sec 내부에 연혁(Experiences) 배치 -->
-      
-            <!-- 수평 타임라인 섹션 -->
-            
+      <section class="experience-sec">
+        <div class="experience-inner">
+          <h2 class="experience-title">Experiences</h2>
+          <div class="year-line">
+            <div class="year-marker">
+              <span class="year-text">2018</span>
+            </div>
+            <div class="year-marker">
+              <span class="year-text">2025</span>
+            </div>
+          </div>
+          <div class="horizontal-timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2018.03 ~ 2024.02</div>
+              <h3 class="timeline-title">호서대학교</h3>
+              <p class="timeline-desc">
+                호서대학교 컴퓨터공학과 졸업
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2022.04 ~ 2025.01</div>
+              <h3 class="timeline-title">아이티엘</h3>
+              <p class="timeline-desc">
+                대학교 3학년부터 약 2년 6개월간 학생연구원 신분으로 아이티엘(주)에서 근무하였습니다. 크롤링을 통한 데이터 수집 자동화와 React, Node.js를 이용한 웹개발, Django로 웹앱 개발 등을 하였습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2022.07 ~ 2022.11</div>
+              <h3 class="timeline-title">음식 이미지 데이터셋 구축</h3>
+              <p class="timeline-desc">
+                ‘당뇨관리 앱을 통한 음식 이미지 활용 및 환류’ 데이터셋 구축 과정에서 음식 이미지 외부 수집을 담당하였습니다.
+                'AI-Hub'에 데이터셋이 등재되었습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.04 ~ 2023.09</div>
+              <h3 class="timeline-title">지역 경제 활성화 정부 프로젝트</h3>
+              <p class="timeline-desc">
+                코로나19 장기화로 쇠퇴하는 천안의 원도심 지역의 상권 활성화를 장려하는 프로젝트를 진행했습니다.
+                충청남도일자리경제진흥원과 협력하였고, Unity와 Django를 이용해 상권을 ​웹툰배경의 가상현실 지도로 나타냈습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2024.01 ~ 2024.05</div>
+              <h3 class="timeline-title">반려동물 진단 플랫폼 개발</h3>
+              <p class="timeline-desc">
+                반려동물 진단, 산책, 및 훈련 일정 등을 체계적으로 관리할 수 있게 돕는 웹을 개발하였습니다.
+                Django, JavaScript, JQuery 등으로 웹페이지를 구성하였고,
+                프롬프트 엔지니어링과 GPT API를 활용해 반려동물 진단 기능을 구현하였습니다. 
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.09 ~ 2024.01</div>
+              <h3 class="timeline-title">꿀픽</h3>
+              <p class="timeline-desc">
+                중소벤처기업부 과제에 선정되어 진행했던 프로젝트로,
+                우리동네 골목상권의 활성화에 도움을 주는 공익적인 서비스를 개발하였습니다.
+                Django와 HTML5, JavaScript를 사용하였습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2024.02 ~ </div>
+              <h3 class="timeline-title">스마트팜</h3>
+              <p class="timeline-desc">
+                'Hoseo University AgTech Digital Twin Global Center' 와 기업'트윈나노' 에서 스마트팜 관련 자문연구원으로 활동하였습니다.
+                송화버섯을 인식하고 생장단계와 수확적기를 판단하는 AI모델과 쪽파를 수확하는 로봇의 소프트웨어 개발을 담당하였습니다.
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2024.09 ~ 2025.02</div>
+              <h3 class="timeline-title">KT Aivle School</h3>
+              <p class="timeline-desc">
+                KT와 고용노동부가 운영하는 Aivle School 교육 프로그램을 이수하였습니다. 
+                AI/DX 혁신사례와 경험을 바탕으로한 기업 실전 프로젝트를 중심으로 기업 실무형 AI 문제를 해결하는 방법을 배웠으며, 
+                AI, Spring Boot, HTML5, JAVA와 같은 다양한 기술스택들을 연마하였습니다.
+              </p>
+            </div>
           </div>
         </div>
-        <section class="experience-sec">
-          <div class="experience-inner">
-            <h2 class="experience-title">Experiences</h2>
-            <div class="year-line">
-              <div class="year-marker">
-                <span class="year-text">2018</span>
-              </div>
-              <div class="year-marker">
-                <span class="year-text">2025</span>
-              </div>
-              
-            </div>
-            <div class="horizontal-timeline">
-              <!-- 타임라인 아이템 1 -->
-              <!-- 타임라인 아이템 2 -->
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2018.03 ~ 2024.02</div>
-                <h3 class="timeline-title">호서대학교</h3>
-                <p class="timeline-desc">
-                  호서대학교 컴퓨터공학과 졸업
-                </p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2022.04 ~ 2025.01</div>
-                <h3 class="timeline-title">아이티엘</h3>
-                <p class="timeline-desc">
-                  대학교 3학년부터 약 2년 6개월간 학생연구원 신분으로 아이티엘(주)에서 근무하였습니다. 크롤링을 통한 데이터 수집 자동화와 React, Node.js를 이용한 웹개발, Django로 웹앱 개발 등을 하였습니다.
-                </p>
-              </div>
-              <!-- 타임라인 아이템 3 -->
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2022.07 ~ 2022.11</div>
-                <h3 class="timeline-title">음식 이미지 데이터셋 구축</h3>
-                <p class="timeline-desc">
-                  ‘당뇨관리 앱을 통한 음식 이미지 활용 및 환류’ 데이터셋 구축 과정에서 음식 이미지 외부 수집을 담당하였습니다.
-                  'AI-Hub'에 데이터셋이 등재되었습니다.                
-                </p>
-              </div>
-
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2023.04 ~ 2023.09</div>
-                <h3 class="timeline-title">지역 경제 활성화 정부 프로젝트</h3>
-                <p class="timeline-desc">
-                  코로나19 장기화로 쇠퇴하는 천안의 원도심 지역의 상권 활성화를 장려하는 프로젝트를 진행했습니다.
-                  충청남도일자리경제진흥원과 협력하였고, Unity와 Django를 이용해 상권을 ​웹툰배경의 가상현실 지도로 나타냈습니다.
-                </p>
-              </div>
-              <!-- 아이템 4 -->
-              
-              <!-- 아이템 5 -->
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2024.01 ~ 2024.05</div>
-                <h3 class="timeline-title">반려동물 진단 플랫폼 개발</h3>
-                <p class="timeline-desc">
-                  반려동물 진단, 산책, 및 훈련 일정 등을 체계적으로 관리할 수 있게 돕는 웹을 개발하였습니다.
-                  Django, JavaScript, JQuery 등으로 웹페이지를 구성하였고,
-                  프롬프트 엔지니어링과 GPT API를 활용해 반려동물 진단 기능을 구현하였습니다. 
-                </p>
-              </div>
-              <!-- 아이템 6 -->
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2023.09 ~ 2024.01</div>
-                <h3 class="timeline-title">꿀픽</h3>
-                <p class="timeline-desc">
-                  중소벤처기업부 과제에 선정되어 진행했던 프로젝트로,
-                  우리동네 골목상권의 활성화에 도움을 주는 공익적인 서비스를 개발하였습니다.
-                  Django와 HTML5, JavaScript를 사용하였습니다.
-                </p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2024.02 ~ </div>
-                <h3 class="timeline-title">스마트팜</h3>
-                <p class="timeline-desc">
-                  'Hoseo University AgTech Digital Twin Global Center' 와 기업'트윈나노' 에서 스마트팜 관련 자문연구원으로 활동하였습니다.
-                  송화버섯을 인식하고 생장단계와 수확적기를 판단하는 AI모델과 쪽파를 수확하는 로봇의 소프트웨어 개발을 담당하였습니다.
-                </p>
-              </div>
-              <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-date">2024.09 ~ 2025.02</div>
-                <h3 class="timeline-title">KT Aivle School</h3>
-                <p class="timeline-desc">
-                  KT와 고용노동부가 운영하는 Aivle School 교육 프로그램을 이수하였습니다. 
-                  AI/DX 혁신사례와 경험을 바탕으로한 기업 실전 프로젝트를 중심으로 기업 실무형 AI 문제를 해결하는 방법을 배웠으며, 
-                  AI, Spring Boot, HTML5, JAVA와 같은 다양한 기술스택들을 연마하였습니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+      </section>
   <footer class="footer">
     <div class="footer-inner">
       <div class="contact-block">
