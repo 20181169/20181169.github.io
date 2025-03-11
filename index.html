@@ -137,6 +137,11 @@
     .profile-desc ul li {
       margin-bottom: 0.5rem;
     }
+    .profile-desc strong {
+      font-weight: bold !important; /* 상위 reset 스타일을 무시하고 강제 적용 */
+      color: #333;                  /* 필요 시 색상도 지정 */
+      /* font-size: 1.1rem;        더 크게 보이길 원하면 추가 */
+    }
 
     /* 오른쪽 영역 */
     .about-right {
@@ -675,16 +680,14 @@
       
             <!-- 소개 문구(이미지에서 '데이터 가치를 만드는...' 부분) -->
             <div class="profile-desc">
-              <p>
-                데이터를 가치로 만드는 데이터 분석가 서민석입니다.
-              </p>
-              <p>
-                심리학을 전공하며 데이터 기반의 통찰력을 얻고자 데이터 분석 분야에 뛰어들었으며,
-                사람들의 행동과 마음을 숫자로 이해하는 일에 큰 흥미를 느낍니다.
-              </p>
+              <p><strong>협업과 소통을 중요시 합니다.</strong></p>
               <ul>
-                <li>데이터 분석에서는 폭넓은 시야를 가지고 접근합니다.</li>
-                <li>통찰과 시각화를 건드릴수록 경쟁력있는 결과물을 만듭니다.</li>
+                <li>약 6개월간 '삼양식품'에서 사용하는 연차료 관리 시스템을 개발하였습니다.</li>
+                <li>애자일 방법론을 채택하여 퍼블리셔, 기획자들과 끊임없이 소통하였습니다.</li>
+              </ul>
+              <p><strong>사용자 입장에서 생각합니다.</strong></p>
+              <ul>
+                <li>기계적으로 요구사항 명세서에 적혀있는 기능들만 구현하는 것이 아닌, 필요한 기능을 능동적으로 생각하고 제공하려 합니다.</li>
               </ul>
             </div>
           </div>
@@ -976,21 +979,21 @@
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
-              <div class="timeline-date">2023.04 ~ 2023.09</div>
-              <h3 class="timeline-title">지역 경제 활성화 정부 프로젝트</h3>
-              <p class="timeline-desc">
-                코로나19 장기화로 쇠퇴하는 천안의 원도심 지역의 상권 활성화를 장려하는 프로젝트를 진행했습니다.
-                충청남도일자리경제진흥원과 협력하였고, Unity와 Django를 이용해 상권을 ​웹툰배경의 가상현실 지도로 나타냈습니다.
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-date">2024.01 ~ 2024.05</div>
+              <div class="timeline-date">2023.01 ~ 2023.05</div>
               <h3 class="timeline-title">반려동물 진단 플랫폼 개발</h3>
               <p class="timeline-desc">
                 반려동물 진단, 산책, 및 훈련 일정 등을 체계적으로 관리할 수 있게 돕는 웹을 개발하였습니다.
                 Django, JavaScript, JQuery 등으로 웹페이지를 구성하였고,
                 프롬프트 엔지니어링과 GPT API를 활용해 반려동물 진단 기능을 구현하였습니다. 
+              </p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">2023.04 ~ 2023.09</div>
+              <h3 class="timeline-title">지역 경제 활성화 정부 프로젝트</h3>
+              <p class="timeline-desc">
+                코로나19 장기화로 쇠퇴하는 천안의 원도심 지역의 상권 활성화를 장려하는 프로젝트를 진행했습니다.
+                충청남도일자리경제진흥원과 협력하였고, Unity와 Django를 이용해 상권을 ​웹툰배경의 가상현실 지도로 나타냈습니다.
               </p>
             </div>
             <div class="timeline-item">
