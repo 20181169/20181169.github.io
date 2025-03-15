@@ -63,7 +63,7 @@ lottie.loadAnimation({
 // ----------------------------------
 // 5. 텍스트 분리 (SplitType)
 // ----------------------------------
-// const splitText = new SplitType('[data-text="split"]', { types: "chars" });
+const splitText = new SplitType('[data-text="split"]', { types: "chars" });
 
 // ----------------------------------
 // 6. 상단 네비게이션 링크 (Projects, Contact)
