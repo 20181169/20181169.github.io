@@ -1,0 +1,520 @@
+body{
+    background: var(--dark);
+    color: var(--beige);
+    cursor: none;
+    transition: .5s;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+}
+body.begie {
+    background: var(--beige);
+    transition: .5s;
+}
+
+/* intro section */
+.intro-sec{ 
+    position: relative; 
+    height: 200vh;
+    filter:brightness(1);
+}
+.intro-sec .sticky-wrapper{ height: 300vh; }
+.intro-sec .sticky-wrapper .sticky{
+    position: sticky;
+    height: 100vh;
+    top: 0;
+}
+.intro-sec img {
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.3);
+}
+.intro-sec .intro-inner{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.intro-sec .intro-inner .intro-tx{
+    font-size: 14vw;
+    font-weight: 700;
+    font-family: var(--font-en);
+}
+.intro-sec .intro-inner .intro-tx .char{ transform: translateY(100%); }
+
+/* about section */
+.about-sec{ 
+    position: relative;
+    height: 100vh;
+    background: var(--dark);
+}
+.about-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%;
+}
+.about-inner .about-left-block{
+    font-size: 9vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: var(--font-en);
+}
+.about-inner .about-right-block{
+    margin-left: auto;
+    font-size: 24px;
+    line-height: 1.5;
+    max-width: 900px;
+    word-break: keep-all;
+    padding-bottom: 130px;
+}
+.lottie-block {
+    position: absolute;
+    bottom: 270px;right: 700px;
+}
+
+/* project section */
+.projects-sec{
+    position: relative;
+    height: 230vh;
+    /* padding: 0 50px; */
+}
+.projects-inner{
+    position: sticky;
+    display: flex;
+    top: 0px;
+}
+.projects-tit{
+    position: absolute;
+    top: 30px;
+    z-index: 10; 
+    font-size: 9vw;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 30px;
+    font-family: var(--font-en);
+    mix-blend-mode: difference;
+}
+.pj-subtit{
+    max-width: 500px;
+    line-height: 1.5;
+}
+.projects-inner .projects-list{
+    display: flex;
+    height: 100vh;
+}
+.projects-inner .projects-item{
+    position: relative;
+    width: 80vw;
+    overflow: hidden;
+}
+.projects-inner .projects-item:hover .project-img-block img{ transform: scale(1.1); }
+.project-img-block video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.project-img-block{
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -10;
+}
+.project-img-block img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -10;
+}
+.projects-inner .projects-link{
+    width: 100%;
+    height: 100%;
+}
+.projects-inner .projects-link img{ transition: .5s ease; }
+.projects-inner .projects-link .project-img-block::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+}
+.project-tx-block{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    padding: 80px 30px;
+}
+.project-tx-block .pj-tit{
+    font-size: 100px;
+    font-family: var(--font-en);
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.pj-tag-list{
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+.pj-tag-item{
+    font-size: 12px;
+    padding: 4px 17px;
+    border: 1px solid var(--beige);
+    border-radius: 30px;
+    background: var(--dark);
+}
+.pj-tag-item.special{ 
+    display: block;
+    opacity: 1; 
+}
+
+/* 기존 버튼 스타일 (필요시 조정) */
+.projects-sec .btn-weblink{
+    /* 기존에 block으로 잡혀 있고 margin-left: auto 로 오른쪽 정렬 */
+    /* 필요 없으면 주석 처리하세요 */
+    display: block; 
+    margin-left: auto; 
+    margin-top: 10px; 
+}
+.btn-weblink{
+    position: relative;
+    padding: 15px 50px;
+    font-size: 1em;
+    transition: .3s;
+}
+.projects-sec .btn-weblink.sitelink{
+    background: linear-gradient(to left, var(--beige) 50%, white 50%); 
+    color: var(--dark);
+    background-size: 200%;
+    background-position: right;
+}
+.btn-weblink.sitelink:hover{
+    background-position: left;
+}
+.projects-sec .btn-weblink.codereview{
+    background: linear-gradient(to left, var(--dark) 50%, var(--beige) 50%); 
+    color: var(--beige);
+    background-size: 200%;
+    background-position: right;
+}
+.projects-sec .btn-weblink.codereview:hover{
+    background-position: left;
+    color: var(--dark);
+}
+.btn-weblink.codereview{
+    background: var(--dark);
+    color: var(--beige);
+    border: 1px solid var(--beige);
+}
+.btn-weblink.github{
+    background: var(--dark);
+    color: var(--beige);
+    border: 1px solid var(--beige);
+}
+
+/* sidepj section */
+.sidepj-sec{ height:300vh;  }
+.sidepj-sec .sidepj-inner{
+    position: relative;
+    padding: 500px 50px;
+}
+.sidepj-sec .sidepj-inner .projects-tit{
+    height: 90%;
+    padding-top: 100px;
+}
+.sidepj-sec .sidepj-inner .projects-tit h2{
+    position: sticky;
+    top: 20px;
+    margin-bottom: 40px;
+}
+.projects-tit-subtit{
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.5;
+    max-width: 700px;
+}
+.sidepj-content-list{ 
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: repeat(2,auto);
+    gap: 20px;
+    padding: 0 30px;
+}
+.sidepj-item{
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    padding: 20px 50px;
+    overflow: hidden;
+}
+.sidepj-item-bg{
+    position: absolute;
+    top: 0;left: 0;bottom: 0;right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    transition: .3s;
+}
+.sidepj-item:hover .sidepj-item-bg{ transform: scale(1.1); } 
+.sidepj-tx-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+.sidepj-item-tit{
+    display: flex;
+    font-size: 5vw;
+    font-weight: 700;
+    z-index: 10;
+    font-family: var(--font-en);
+}
+.sidepj-subtit{ 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    gap: 10px;
+}
+.sp-subtit-tx{
+    position: relative;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 50px;
+}
+.sidepj-subtit .btn-weblink{
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.sidepj-subtit .btn-weblink.sitelink{
+    background: var(--beige);
+    color: var(--dark);
+}
+.sidepj-subtit-tx{
+    line-height: 5vh;
+    font-size: 1.2vw;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+.sidepj-tag-list{
+    position: relative;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.sidepj-tag-list .sidepj-tag-item{
+    border: 1px solid var(--beige);
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 4px 17px;
+    font-size: 12px;
+}
+.sidepj-tag-list .sidepj-tag-item.response{
+    background: #b85042;
+    border: none;
+}
+.sidepj-tag-list .sidepj-tag-item.only-pc{
+    background: #c7e7f7;
+    border: none;
+    color: var(--dark);
+}
+
+@media (max-width:1330px) {
+    .sidepj-tag-list{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(2,auto);
+        text-align: center;
+    }
+}
+@media (max-width:987px) {
+    .sidepj-item{
+        position: relative;
+        height: 80vh;
+        padding: 0 20px;
+        overflow: hidden;
+    }
+}
+/* mobile */
+@media (max-width:768px) {
+    /* intro section */
+    .intro-sec .intro-inner .intro-tx{ font-size: 23vw; }
+    /* about section */
+    .about-inner .about-left-block{ font-size: 18vw; }
+    .about-inner .about-right-block{ font-size: 3vw; }
+    .lottie-block { display: none; }
+    /* project section */
+    .projects-sec{
+        height: 100%;
+        padding: 0px;
+    }
+    .projects-inner{
+        position: relative;
+        height: 100%;
+    }
+    .projects-tit{
+        font-size: 15vw;
+        margin-left: 20px;
+        mix-blend-mode: normal;
+    }
+    .projects-inner .projects-list{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        gap: 10px;
+    }
+    .projects-inner .projects-item{
+        position: relative;
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+    }
+    .project-tx-block{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 0 20px;
+    }
+    .project-tx-block .pj-tit{
+        font-size: 80px;
+        margin-bottom: 10px;
+        margin-top: 100px;
+    }
+    .btn-weblink{
+        padding: 12px 20px;
+        width: 100%;
+    }
+    .pj-tag-list{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(2,auto);
+        padding: 20px;
+    }
+    /* sidepj section */
+    .sidepj-sec{ 
+        height: 370vh;
+        padding: 20px; 
+    }
+    .sidepj-sec .sidepj-inner .projects-tit{
+        position: relative;
+        top: 0px;
+        font-size: 14vw;
+        margin-left: 0px;
+    }
+    .sidepj-sec .sidepj-inner .projects-tit h2{
+        position: relative;
+        font-size: 14vw;
+    }
+    .sidepj-content-list{ 
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 0;
+        margin-top: 10px;
+    }
+    .sidepj-sec .sidepj-inner{ padding: 10px 0px; }
+    .sidepj-item{
+        height: auto;
+        border: 2px solid var(--beige);
+    }
+    .sidepj-sec .projects-tit-subtit{
+        font-size: 3vw;
+        font-weight: 500;
+        max-width: 500px;
+        line-height: 1.5;
+    }
+    .sidepj-item{
+        position: relative;
+        height: 80vh;
+        padding: 20px 20px;
+        overflow: hidden;
+    }
+    .sidepj-item-tit{
+        display: flex;
+        font-size: 15vw;
+        font-weight: 700;
+        z-index: 10;
+       
+    }
+    .sidepj-tag-list{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(2,auto);
+        padding: 0px;
+        gap: 5px;
+    }
+    .sidepj-tag-list .sidepj-tag-item{ text-align: center; }
+}
+@media (max-width:500px) {
+    .about-inner{
+        padding: 10px;
+        justify-content: center;
+        gap: 50px;
+    }
+    .project-tx-block{ padding: 0 10px; }
+    .project-tx-block .pj-tit{ font-size: 70px; } 
+    .pj-tag-list{ 
+        padding: 0px; 
+        text-align: center;
+    }
+    /* sidepj section */
+    .sidepj-sec{ padding: 10px; }
+    .sidepj-sec .sidepj-inner .projects-tit{ padding: 0; }
+    .sidepj-sec .sidepj-inner .projects-tit h2{ font-size: 15vw; }
+    .sidepj-item{ padding: 10px 10px; }
+    .sidepj-tag-list .sidepj-tag-item{ padding: 4px 10px; }
+}
+
+/* =======================================
+   [1] 버튼 크기 고정 & 텍스트 중앙 정렬
+   ======================================= */
+.btn-weblink {
+    /* 기존 코드에 덮어씌울 수 있도록! */
+    display: inline-flex !important; /* 수평/수직 중앙 정렬 */
+    justify-content: center;
+    align-items: center;
+    width: 200px;       /* 버튼 폭 */
+    height: 50px;       /* 버튼 높이 */
+    margin-left: 0;     /* 필요 시 auto 대신 원하는 값으로 조정 */
+    margin-top: 10px;   /* 상단 여백은 유지 */
+    padding: 0;         /* 내부 여백을 일단 제거 후 */
+    font-size: 16px;    
+    font-weight: 600;
+    text-decoration: none;
+    transition: .3s;
+}
+.btn-weblink p {
+    /* <p> 태그 기본 마진 제거 */
+    margin: 0;
+    padding: 0;
+}
+
+/* =======================================
+   [2] 갈색 배경 전용 클래스 .brown
+   ======================================= */
+.btn-weblink.sitelink.brown {
+    background: brown;
+    color: #fff;
+    background-size: auto;
+    background-position: initial;
+}
+.btn-weblink.sitelink.brown:hover {
+    background: #6b3d00;
+}
