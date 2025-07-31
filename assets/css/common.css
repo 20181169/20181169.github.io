@@ -20,7 +20,7 @@
     transform: translate(-50%, -50%);
     opacity: 0.9;
 }
-.custom-cursor.white{ background: #fff; }
+.custom-cursor.white{ background: #0c0c0c; }
 
 .sidepj-overlay{
     position: absolute;

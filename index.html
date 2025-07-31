@@ -45,11 +45,52 @@
       color: black;
       text-decoration: none;
     }
+    @media (max-width: 900px) {
+  .about-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items:stretch;
+  }
+  .about-right {
+    max-width: 100%;
+    width: 100%;
+    min-width: unset;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+}
   </style>
   
   <!-- 수평 타임라인 + 글자 크기 조절 -->
   <style>
     /* (1) 수평 타임라인 컨테이너 - 디자인 개선 */
+    .tab-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.tab-btn {
+  flex: 1 1 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #eee;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.tab-btn.active {
+  background: #007acc;
+  color: #fff;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
     .about-sec {
       width: 100%;
       padding: 1rem;              /* 기존 2rem → 1rem으로 축소 */
@@ -70,15 +111,28 @@
 
     /* 왼쪽 영역 */
     .about-left {
-      flex: 1 1 300px;    
-      max-width: 400px;
+      flex: 1 1 300px;   
+      height:1000px;
+      max-height:100vh; 
       background-color: #fff;
       padding: 1.5rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
       border-radius: 8px;
       color: #333; /* 글씨 잘 보이도록 */
+      margin-bottom: 1rem;
+      overflow-y:auto;  
+      scrollbar-width:thin; 
     }
-
+    .about-left::-webkit-scrollbar{       /* Chrome/Edge              */
+      width:6px;
+    }
+    .about-left::-webkit-scrollbar-thumb{
+      background:#b3b3b3;
+      border-radius:3px;
+    }
+    .about-left::-webkit-scrollbar-track{
+      background:transparent;
+    }
     /* 프로필 사진 */
     .profile-img {
       text-align: center;
@@ -605,6 +659,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.14/lottie.min.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
+<script>
+  // 탭 클릭 시 내용 토글
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // 모든 버튼/탭 비활성화
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // 현재 버튼/탭만 활성화
+        this.classList.add('active');
+        document.querySelector('.tab-content.' + this.dataset.tab).classList.add('active');
+      });
+    });
+  });
+</script>
 <body>
   <div class="custom-cursor">
     <span class="blind">커스텀 커서</span>
@@ -659,7 +732,6 @@
           <div class="about-left">
             <!-- 프로필 사진 -->
             <div class="profile-img">
-              <!-- 실제 이미지 경로로 수정하세요 -->
               <img src="./assets/img/빅분기사진.jpg" alt="Profile Photo" />
             </div>
             <!-- 이름, 기본 정보 -->
@@ -671,26 +743,39 @@
               <li><strong>Mobile:</strong> +82 10.4492.0802</li>
               <li><strong>Email:</strong> peter110998@naver.com</li>
             </ul>
-      
-            <!-- 소개 문구(이미지에서 '데이터 가치를 만드는...' 부분) -->
+
+            <!-- ▼▼▼ 탭 영역 시작 ▼▼▼ -->
             <div class="profile-desc">
-              <p><strong>&nbsp;</strong></p>
-              <p><strong>협업과 소통을 중요시 합니다.</strong></p>
-              <ul>
-                <li>약 6개월간 '삼양식품'에서 사용하는 연차료 관리 시스템을 개발하였습니다.
-                  애자일 방법론을 채택하여 퍼블리셔, 기획자들과 끊임없이 소통하였고 현재까지도 사용중에 있습니다.
-                </li>
-                
-              </ul>
-              <p><strong>&nbsp;</strong></p>
-              <p><strong>&nbsp;</strong></p>
-              <p><strong>사용자 입장에서 생각합니다.</strong></p>
-              <ul>
-                <li>기계적으로 요구사항 명세서에 적혀있는 기능들만 구현하는 것이 아닌, 필요한 기능을 능동적으로 생각하고 제공하려 합니다.</li>
-              </ul>
+              <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="ai">AI 개발자</button>
+                <button class="tab-btn" data-tab="web">웹 개발자</button>
+              </div>
+
+              <!-- AI 개발자 설명 -->
+              <div class="tab-content ai active">
+                <p><strong>AI 개발자로서의 강점</strong></p>
+                <ul>
+                  <li><strong>End-to-End 멀티모달 경험</strong> ─ 텍스트·음성·이미지 등 다양한 데이터를 수집·전처리하고, 멀티모달 모델 아키텍처 설계와 파라미터 튜닝까지 직접 수행했습니다.</li>
+                  <li><strong>5회 수상으로 검증된 실력</strong> ─ 한국어 음성인식·오디오 초해상도·의료영상 AI 경진대회에서 최우수상 포함 총 5회 입상해 문제 해결 역량을 입증했습니다.</li>
+                  <li><strong>생성형 AI 서비스화</strong> ─ GPT-4o API와 Vision-LLM 결합 파이프라인을 구축해 사내 프로토타입을 배포하고 의사결정 지원 지표를 40% 단축했습니다.</li>
+                  <li><strong>MLOps 기반 운영</strong> ─ Docker·Kubernetes·FastAPI로 inference 서버를 자동화하고, Prometheus·Grafana로 실시간 모니터링 환경을 구현했습니다.</li>
+                </ul>
+              </div>
+
+              <!-- 웹 개발자 설명 -->
+              <div class="tab-content web">
+                <p><strong>웹 개발자로서의 경험</strong></p>
+                <ul>
+                  <li><strong>실전 배포 경험</strong> ─ 약 6개월 동안 모 기업에서 사용하는 연차료 관리 시스템을 기획·디자인·퍼블리싱 팀과 2주 스프린트로 협업하며 개발한 끝에, 현재까지도 200+ 임직원이 안정적으로 사용 중입니다.</li>
+                  <li><strong>백엔드 전문성</strong> ─ Django·Spring Boot·Node.js 기반 REST API 설계 경험이 풍부하며, AI 모델을 탑재한 웹 애플리케이션을 다수 개발하여 실제 예측·분석 기능이 동작하는 서비스로 구현해낸 경험이 있습니다.</li>                </ul>
+                <p><strong>웹 개발자로서의 태도</strong></p>
+                <ul>
+                  <li><strong>사용자 중심 설계</strong> ─ ‘왜 필요할까?’를 먼저 고민하고, 데이터를 근거로 기능을 제안·검증하여 불필요한 개발 사이클을 줄입니다.</li>
+                  <li><strong>지속 가능한 코드</strong> ─ 테스트 코드와 문서화를 기본으로 하여 인수인계 없는 환경에서도 유지·보수가 용이한 구조를 지향합니다.</li>
+                </ul>
+              </div>
             </div>
           </div>
-      
           <!-- 오른쪽 영역 -->
           <div class="about-right">
             <!-- Education -->
