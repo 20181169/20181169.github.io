@@ -41,56 +41,9 @@
       cursor: pointer;
     }
     .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-    }
-    @media (max-width: 900px) {
-      .about-container {
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items:stretch;
-      }
-      .about-right {
-        max-width: 100%;
-        width: 100%;
-        min-width: unset;
-        margin: 0 auto;
-        padding: 1rem;
-        box-sizing: border-box;
-      }
-    }
-  </style>
-  
-  <!-- 수평 타임라인 + 글자 크기 조절 -->
-  <style>
-    /* (1) 수평 타임라인 컨테이너 - 디자인 개선 */
-    .tab-buttons {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .tab-btn {
-      flex: 1 1 0;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      background: #eee;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .tab-btn.active {
-      background: #007acc;
-      color: #fff;
-    }
+    .close:focus { color: black; text-decoration: none; }
 
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-    }
+    /* -------------------- ABOUT 영역 핵심 수정 -------------------- */
     .about-sec {
       width: 100%;
       padding: 1rem;
@@ -99,130 +52,101 @@
       font-family: 'Noto Sans KR', sans-serif;
       color: #333;
     }
-
-    /* 섹션 내부를 감싸는 컨테이너 */
+    /* flex -> grid 로 변경, 좌우 항상 동일 높이 */
     .about-container {
       max-width: 1400px;
-      margin: 0 auto;      
-      display: flex;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) minmax(0, 2fr);
       gap: 1rem;
-      flex-wrap: wrap;
+      align-items: stretch; /* 같은 행의 아이템 높이 동일 */
     }
-
-    /* 왼쪽 영역 */
-    .about-left {
-      flex: 1 1 300px;   
-      height:1000px;
-      max-height:100vh; 
+    .about-left,
+    .about-right {
       background-color: #fff;
       padding: 1.5rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
       border-radius: 8px;
-      color: #333;
-      margin-bottom: 1rem;
-      overflow-y:auto;  
-      scrollbar-width:thin; 
-    }
-    .about-left::-webkit-scrollbar{ width:6px; }
-    .about-left::-webkit-scrollbar-thumb{ background:#b3b3b3; border-radius:3px; }
-    .about-left::-webkit-scrollbar-track{ background:transparent; }
-
-    /* 프로필 사진 */
-    .profile-img {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .profile-img img {
-      display: block;
-      margin: 0 auto;
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-    /* 이름 스타일 */
-    .profile-name {
-      font-size: 1.5rem;
-      margin: 0.5rem 0;
-      text-align: center;
-      color: #333;
-    }
-    .profile-name span {
-      font-size: 1rem;
-      color: #666;
-      margin-left: 0.5rem;
-    }
-
-    /* 프로필 기본 정보 */
-    .profile-info {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0;
-      font-size: 0.95rem;
-      color: #333;
-    }
-    .profile-info li {
-      margin-bottom: 0.3rem;
-    }
-    .profile-info strong {
-      display: inline-block;
-      width: 60px; 
-      color: #333;
-    }
-
-    /* 소개 문구 */
-    .profile-desc p,
-    .profile-desc ul {
-      line-height: 1.5;
-      margin: 0.5rem 0;
-      color: #333;
-    }
-    .profile-desc ul {
-      list-style: disc;
-      margin-left: 1.5rem;
-    }
-    .profile-desc ul li {
-      margin-bottom: 0.5rem;
-    }
-    .profile-desc strong {
-      font-weight: bold !important;
-      color: #333;
-    }
-
-    /* 오른쪽 영역 */
-    .about-right {
-      flex: 2 1 600px;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
       color: #333;
     }
+    /* 고정 높이 제거 */
+    .about-left {
+      overflow: auto;
+      scrollbar-width: thin;
+      /*margin-bottom: 1rem;*/
+    }
+    .about-left::-webkit-scrollbar{ width:6px; }
+    .about-left::-webkit-scrollbar-thumb{ background:#b3b3b3;border-radius:3px; }
+    .about-left::-webkit-scrollbar-track{ background:transparent; }
+
+    /* 모바일 한 열로 */
+    @media (max-width: 900px) {
+      .about-container { grid-template-columns: 1fr; }
+      .about-right, .about-left {
+        max-width: 100%;
+        width: 100%;
+        min-width: unset;
+        margin: 0 auto;
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+    }
+    /* ----------------------------------------------------------- */
+
+    /* 수평 타임라인 + 글자 크기 조절 */
+    .tab-buttons { display:flex; gap:0.5rem; margin-bottom:0.5rem; }
+    .tab-btn {
+      flex:1 1 0;
+      padding:0.5rem 1rem;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      background:#eee;
+      font-weight:700;
+      font-size:0.9rem;
+    }
+    .tab-btn.active { background:#007acc; color:#fff; }
+    .tab-content { display:none; }
+    .tab-content.active { display:block; }
+
+    /* 왼쪽 영역 - 내부 요소 */
+    .profile-img { text-align:center; margin-bottom:1rem; }
+    .profile-img img {
+      display:block;
+      margin:0 auto;
+      width:150px; height:150px;
+      object-fit:cover; border-radius:50%;
+    }
+    .profile-name { font-size:1.5rem; margin:0.5rem 0; text-align:center; color:#333; }
+    .profile-name span { font-size:1rem; color:#666; margin-left:0.5rem; }
+    .profile-info { list-style:none; padding:0; margin:1rem 0; font-size:0.95rem; color:#333; }
+    .profile-info li { margin-bottom:0.3rem; }
+    .profile-info strong { display:inline-block; width:60px; color:#333; }
+    .profile-desc p, .profile-desc ul { line-height:1.5; margin:0.5rem 0; color:#333; }
+    .profile-desc ul { list-style:disc; margin-left:1.5rem; }
+    .profile-desc ul li { margin-bottom:0.5rem; }
+    .profile-desc strong { font-weight:bold !important; color:#333; }
+
+    /* 오른쪽 영역 - 카드 공통 */
     .about-right > div {
-      background-color: #fff;
-      padding: 1.5rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      border-radius: 8px;
+      background-color:#fff;
+      padding:1.5rem;
+      box-shadow:0 0 10px rgba(0,0,0,0.05);
+      border-radius:8px;
     }
     .about-right h3 {
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-      border-bottom: 2px solid #007ACC;
-      display: inline-block;
-      padding-bottom: 0.3rem;
-      color: #333;
+      margin-bottom:1rem;
+      font-size:1.2rem;
+      border-bottom:2px solid #007ACC;
+      display:inline-block;
+      padding-bottom:0.3rem;
+      color:#333;
     }
-    .about-right ul {
-      list-style: disc;
-      margin-left: 1.5rem;
-      line-height: 1.5;
-      color: #333;
-    }
-    .about-right li {
-      margin-bottom: 0.5rem;
-    }
-
-    .awards p { margin: 0.5rem 0; color: #333; }
+    .about-right ul { list-style:disc; margin-left:1.5rem; line-height:1.5; color:#333; }
+    .about-right li { margin-bottom:0.5rem; }
+    .awards p { margin:0.5rem 0; color:#333; }
 
     .experience-sec {
       min-height: 100vh;
@@ -234,451 +158,88 @@
       background-color: #f9f9f9;
       overflow-x: auto;
     }
-    .experience-inner {
-      min-width: 800px; 
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .horizontal-timeline {
-      display: flex;       
-      align-items: center;
-      position: relative;
-      min-width: 100%;
-      padding: 3rem 0;
-    }
+    .experience-inner { min-width:800px; margin:0 auto; position:relative; }
+    .horizontal-timeline { display:flex; align-items:center; position:relative; min-width:100%; padding:3rem 0; }
     .horizontal-timeline::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: #ddd;
-      transform: translateY(-50%);
-      z-index: 1;
+      content:""; position:absolute; top:50%; left:0; width:100%; height:2px;
+      background-color:#ddd; transform:translateY(-50%); z-index:1;
     }
-
     .timeline-item {
-      position: relative;
-      flex: 0 0 auto;
-      width: 280px;
-      margin-right: 3rem;
-      text-align: center;
-      z-index: 2;
+      position:relative; flex:0 0 auto; width:280px; margin-right:3rem; text-align:center; z-index:2;
+      background-color:#fff; border-radius:10px; box-shadow:0 8px 15px rgba(0,0,0,0.1);
+      padding:2rem 1rem; transition:all .3s ease; opacity:0; transform:translateX(-50px);
+      min-height:370px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    }
+    .timeline-item.show { opacity:1; transform:translateX(0); }
+    .timeline-item:hover { transform:translateY(-5px); box-shadow:0 15px 25px rgba(0,0,0,0.15); }
+    .experience-title { font-size:2rem !important; font-weight:700; margin-bottom:2rem; text-align:center; color:#333; }
+    .timeline-date { font-size:0.9rem !important; font-weight:bold; margin-bottom:0.5rem; color:#999; }
+    .timeline-title { font-size:1.1rem !important; margin-bottom:0.5rem; font-weight:600; color:#333; }
+    .timeline-desc { font-size:0.95rem !important; line-height:1.6 !important; color:#555; margin:0 1rem; }
+    .timeline-dot { width:20px; height:20px; margin:0 auto 1rem; border-radius:50%; background:#3498db; z-index:3; border:3px solid #fff; box-shadow:0 0 0 3px #3498db; }
 
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-      padding: 2rem 1rem;
-      transition: all 0.3s ease;
+    .year-line { position:relative; margin:2rem 0 3rem; border-top:2px solid #ddd; display:flex; justify-content:space-between; align-items:center; padding:0 1rem; }
+    .year-marker { position:relative; }
+    .year-marker::before { content:""; position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:20px; height:20px; border-radius:50%; background:#3498db; }
+    .year-text { margin-top:10px; display:block; text-align:center; font-size:0.9rem; color:#333; }
 
-      opacity: 0;
-      transform: translateX(-50px);
+    .JiHyeok { position:relative; display:flex; justify-content:space-between; align-items:center; list-style:none; margin:0 auto; padding:0; max-width:1000px; }
+    .JiHyeok::before { content:""; position:absolute; top:50%; left:0; width:100%; height:2px; background:#ccc; z-index:-1; }
+    .JiHyeok-item { position:relative; text-align:center; width:10%; }
+    .JiHyeok-item .circle { display:inline-block; width:24px; height:24px; border:2px solid #007bff; border-radius:50%; background:#fff; z-index:1; }
+    .JiHyeok-item .year { margin-top:10px; font-weight:bold; font-size:16px; color:#333; }
+    .JiHyeok-item .description { margin-top:5px; font-size:14px; color:#666; line-height:1.4; }
 
-      min-height: 370px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .timeline-item.show {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .timeline-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    }
-
-    .experience-title {
-      font-size: 2rem !important;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: #333;
-    }
-    .timeline-date {
-      font-size: 0.9rem !important;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #999;
-    }
-    .timeline-title {
-      font-size: 1.1rem !important;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      color: #333;
-    }
-    .timeline-desc {
-      font-size: 0.95rem !important;
-      line-height: 1.6 !important;
-      color: #555;
-      margin: 0 1rem;
-    }
-
-    .timeline-dot {
-      width: 20px;
-      height: 20px;
-      margin: 0 auto 1rem;
-      border-radius: 50%;
-      background-color: #3498db;
-      z-index: 3;
-      border: 3px solid #fff;
-      box-shadow: 0 0 0 3px #3498db;
-    }
-
-    .year-block { position: relative; width: 20%; text-align: center; z-index: 2; }
-    .year-circle {
-      width: 60px; height: 60px; margin: 0 auto 1rem;
-      border-radius: 50%; background-color: #3498db; color: #fff;
-      font-weight: bold; font-size: 1rem; line-height: 60px;
-      box-shadow: 0 0 0 4px #f9f9f9;
-    }
-    .year-events { list-style: none; padding: 0; margin-top: 1rem; text-align: left; }
-    .year-events li { margin-bottom: 0.5rem; position: relative; padding-left: 20px; line-height: 1.4; color: #555; }
-    .year-events li::before { content: "•"; position: absolute; left: 0; top: 0; color: #3498db; }
-
-    .year-line {
-      position: relative;
-      margin: 2rem 0 3rem;
-      border-top: 2px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 1rem;
-    }
-    .year-marker { position: relative; }
-    .year-marker::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: #3498db;
-    }
-    .year-text {
-      margin-top: 10px;
-      display: block;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #333;
-    }
-  </style>
-
-  <style>
-    .JiHyeok {
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      list-style: none;
-      margin: 0 auto;
-      padding: 0;
-      max-width: 1000px;
-    }
-    .JiHyeok::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: #ccc;
-      z-index: -1;
-    }
-    .JiHyeok-item { position: relative; text-align: center; width: 10%; }
-    .JiHyeok-item .circle {
-      display: inline-block; width: 24px; height: 24px;
-      border: 2px solid #007bff; border-radius: 50%; background-color: #fff; z-index: 1;
-    }
-    .JiHyeok-item .year { margin-top: 10px; font-weight: bold; font-size: 16px; color: #333; }
-    .JiHyeok-item .description { margin-top: 5px; font-size: 14px; color: #666; line-height: 1.4; }
-  </style>
-
-  <style>
-    .gantt-chart {
-      position: relative;
-      width: 100%;
-      max-width: 1000px;
-      border: 1px solid #ccc;
-      margin: 2rem auto;
-    }
-    .gantt-header {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      background: #f2f2f2;
-      border-bottom: 1px solid #ccc;
-    }
-    .gantt-header div {
-      padding: 10px; text-align: center; border-right: 1px solid #ccc;
-    }
-    .gantt-header div:last-child { border-right: none; }
-    .gantt-row { position: relative; height: 40px; border-bottom: 1px solid #eee; }
-    .gantt-row:last-child { border-bottom: none; }
+    .gantt-chart { position:relative; width:100%; max-width:1000px; border:1px solid #ccc; margin:2rem auto; }
+    .gantt-header { display:grid; grid-template-columns:repeat(8,1fr); background:#f2f2f2; border-bottom:1px solid #ccc; }
+    .gantt-header div { padding:10px; text-align:center; border-right:1px solid #ccc; }
+    .gantt-header div:last-child { border-right:none; }
+    .gantt-row { position:relative; height:40px; border-bottom:1px solid #eee; }
+    .gantt-row:last-child { border-bottom:none; }
     .task-bar {
-      position: absolute; height: 30px; background-color: #007bff; color: #fff;
-      display: flex; align-items: center; justify-content: center; border-radius: 4px;
-      top: 5px; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      position:absolute; height:30px; background:#007bff; color:#fff; display:flex; align-items:center; justify-content:center;
+      border-radius:4px; top:5px; font-size:14px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
-    @media (max-width: 600px) {
-      .gantt-header { grid-template-columns: repeat(4, 1fr); }
-    }
+    @media (max-width:600px){ .gantt-header{ grid-template-columns:repeat(4,1fr); } }
 
-    /* Awards */
-    .awards-sec { padding: 2rem; background-color: #f9f9f9; box-sizing: border-box; }
-    .awards-sec h2 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #333; text-align: center; }
-    .section-subtitle { font-size: 1.2rem; margin-bottom: 1.5rem; color: #555; text-align: center; }
-    .awards-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-    .award-item { background-color: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
-    .award-image img { display: block; margin: 0 auto; max-width: 200px; width: 100%; height: auto; border-radius: 6px; object-fit: cover; }
-    .award-description h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #333; }
-    .award-description ul { list-style: disc; margin-left: 1.5rem; color: #555; line-height: 1.4; }
-    .award-description li { margin-bottom: 0.3rem; }
+    .awards-sec { padding:2rem; background-color:#f9f9f9; box-sizing:border-box; }
+    .awards-sec h2 { font-size:1.8rem; margin-bottom:.5rem; color:#333; text-align:center; }
+    .section-subtitle { font-size:1.2rem; margin-bottom:1.5rem; color:#555; text-align:center; }
+    .awards-container { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1.5rem; }
+    .award-item { background:#fff; border:1px solid #ddd; border-radius:8px; padding:1rem; display:flex; flex-direction:column; gap:1rem; }
+    .award-image img { display:block; margin:0 auto; max-width:200px; width:100%; height:auto; border-radius:6px; object-fit:cover; }
+    .award-description h3 { font-size:1.1rem; margin-bottom:.5rem; color:#333; }
+    .award-description ul { list-style:disc; margin-left:1.5rem; color:#555; line-height:1.4; }
+    .award-description li { margin-bottom:.3rem; }
+    .awards-section { margin-top:2rem; }
+    .awards-section h2 { font-size:1.6rem; margin-bottom:1.5rem; color:#333; text-align:center; }
+    .awards-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+    @media (max-width:768px){ .awards-grid{ grid-template-columns:1fr; } }
 
-    .awards-section { margin-top: 2rem; }
-    .awards-section h2 { font-size: 1.6rem; margin-bottom: 1.5rem; color: #333; text-align: center; }
-    .awards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    @media (max-width: 768px) { .awards-grid { grid-template-columns: 1fr; } }
-
-    /* Skills */
-    .skills { font-family: sans-serif; line-height: 1.6; padding: 2rem; background-color: #fff; }
-    .skills-title { font-size: 1.8em; font-weight: 900; margin-bottom: 0.5em; text-align: center; }
-    .skills-section { margin-bottom: 1.2em; }
-    .section-title { font-size: 1.3em; font-weight: 900; margin: 0.8em 0 0.4em; }
-    .skills strong { font-weight: 700; color: #333; }
+    .skills { font-family:sans-serif; line-height:1.6; padding:2rem; background:#fff; }
+    .skills-title { font-size:1.8em; font-weight:900; margin-bottom:.5em; text-align:center; }
+    .skills-section { margin-bottom:1.2em; }
+    .section-title { font-size:1.3em; font-weight:900; margin:.8em 0 .4em; }
+    .skills strong { font-weight:700; color:#333; }
   </style>
 
   <!-- gsap -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <!-- lenis -->
-  <!-- <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>  -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
   <!-- text split -->
-  <!-- <script src="https://unpkg.com/split-type"></script> -->
   <script type="module" src="https://cdn.jsdelivr.net/npm/split-type"></script>
   <!-- js -->
   <script src="./assets/js/index.js" defer></script>
   <!-- lottie -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.14/lottie.min.js"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-  <!-- ✅ Responsive Additions (원본 유지, 오버라이드만 추가) -->
-  <style>
-    /* ABOUT - 작은 화면에서 고정 높이 제거 */
-    @media (max-width: 1200px) {
-      .about-left {
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-      }
-    }
-    @media (max-width: 900px) {
-      .about-left {
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        padding: 1rem;
-      }
-      .about-right {
-        padding: 1rem !important;
-      }
-      .about-container {
-        gap: 0.75rem !important;
-      }
-    }
-
-    /* EXPERIENCE - 모바일에서 세로 타임라인로 전환 + 100vh 해제 */
-    @media (max-width: 1024px) {
-      .experience-sec {
-        min-height: auto !important;
-      }
-    }
-    @media (max-width: 768px) {
-      .experience-inner { min-width: unset !important; padding: 0 1rem; }
-      .horizontal-timeline {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 1rem !important;
-        padding: 1rem 0 !important;
-        overflow: visible !important;
-      }
-      .horizontal-timeline::before { display: none !important; }
-      .timeline-item {
-        width: 100% !important;
-        margin-right: 0 !important;
-        min-height: unset !important;
-        align-items: flex-start !important;
-        text-align: left !important;
-        padding: 1rem !important;
-        transform: none !important;
-        opacity: 1 !important;
-      }
-      .timeline-dot {
-        position: absolute !important;
-        left: 12px !important;
-        top: 1rem !important;
-        margin: 0 !important;
-        box-shadow: 0 0 0 3px #fff !important;
-      }
-      .timeline-item { padding-left: 44px !important; }
-      .timeline-title, .timeline-desc { text-align: left !important; }
-      .experience-title { margin-bottom: 1.25rem !important; }
-    }
-
-    /* ABOUT/EXPERIENCE 사이 여백 안정화 (작은 화면) */
-    @media (max-width: 768px) {
-      .about-sec { padding-bottom: 1rem !important; }
-      .experience-sec { padding-top: 1.25rem !important; }
-    }
-    
-  </style>
-  <style>
-    @media (max-width: 900px) {
-      /* About 왼쪽 패널: 고정 높이/스크롤/스티키 해제 */
-      .about-left {
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        position: static !important; /* 외부 CSS에서 sticky/fixed가 있더라도 무력화 */
-      }
-
-      /* About 레이아웃을 단일 컬럼으로 강제 정렬 */
-      .about-container {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 0.75rem !important;
-      }
-      .about-right { width: 100% !important; }
-
-      /* 섹션 간 여백을 확실히 주어 겹침 여지 제거 */
-      .about-sec { margin-bottom: 24px !important; }
-      
-      /* Awards 섹션이 새로운 스택 컨텍스트를 갖도록 해서 겹쳐 보이는 현상 방지 */
-      .awards-sec {
-        clear: both !important;
-        margin-top: 24px !important;
-        position: relative !important;
-        z-index: 0 !important;
-        isolation: isolate; /* 자식의 z-index가 위로 뚫고 올라오지 않게 함 */
-      }
-
-      /* 혹시 상단 마진이 음수/겹침으로 덮여 있을 경우 대비 */
-      .awards-sec .awards-section {
-        position: relative;
-        z-index: 1;
-        margin-top: 0 !important;
-      }
-    }
-
-    /* 아주 작은 화면에서 카드 그림자/반경이 겹쳐 보이는 것 완화 */
-    @media (max-width: 480px) {
-      .about-right > div,
-      .award-item {
-        margin-bottom: 12px;
-      }
-    }
-  </style>
-  <style>
-    @media (max-width: 1024px) {
-      /* 1) About 왼쪽 박스의 고정높이/스티키/스크롤 해제 */
-      .about-left {
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        position: static !important;
-        transform: none !important; /* transform이 있으면 새 스택 생성되어 겹침 유발 */
-      }
-
-      /* 2) About 섹션 자체도 잘림이 없도록 */
-      .about-sec {
-        overflow: visible !important;
-        position: relative !important;
-        z-index: 0 !important;
-        /* 섹션간 margin collapse 방지 */
-        display: flow-root; 
-        padding-bottom: 16px !important;
-        margin-bottom: 0 !important;
-      }
-
-      /* 3) 메인 래퍼/스티키/오버레이가 위에서 덮지 않도록 */
-      .main-wrapper,
-      .sticky-wrapper,
-      .sticky {
-        overflow: visible !important;
-        position: static !important;
-      }
-      /* 데코 오버레이가 상단을 덮는 경우를 모바일에서만 비활성화 */
-      .bottom-overlay {
-        display: none !important;
-        /* 만약 디자인상 반드시 보여야 한다면:
-          position: relative !important; z-index: -1 !important; pointer-events: none !important; 로 바꿔도 OK */
-      }
-
-      /* 4) Awards 섹션을 새로운 스택 컨텍스트로 올리고, margin collapse 방지 */
-      .awards-sec {
-        position: relative !important;
-        z-index: 10 !important;        /* About(0)보다 위 */
-        isolation: isolate;            /* 자식 z-index가 다른 섹션에 간섭 금지 */
-        overflow: visible !important;
-        display: flow-root;            /* margin 상쇄 방지 */
-        margin-top: 0 !important;
-        padding-top: 24px !important;  /* 헤더/카드가 가려지지 않게 살짝 띄움 */
-      }
-      .awards-sec .awards-section {
-        position: relative;
-        z-index: 1;     /* 내부 카드/제목이 확실히 보이도록 */
-        margin-top: 0 !important;
-      }
-
-      /* 5) About 오른쪽 카드들의 그림자/반경이 위에서 덮는 경우 방지(스택 재정렬) */
-      .about-right > div {
-        position: relative !important;
-        z-index: 1 !important;         /* awards-sec(z-index:10) 아래 */
-        transform: none !important;     /* 애니메이션 transform이 있으면 겹침 유발 */
-      }
-    }
-
-    /* 아주 작은 화면에서 카드 간격 보정 */
-    @media (max-width: 480px) {
-      .about-right > div,
-      .awards-sec .award-item {
-        margin-bottom: 12px !important;
-      }
-    }
-  </style>
-  <style>
-    /* ===== 데스크톱(큰 화면)에서 ABOUT 좌우 하단 높이 불일치 해결 ===== */
-    @media (min-width: 1024px) {
-      /* 부모가 아이템을 같은 높이로 늘리도록 */
-      .about-container {
-        align-items: stretch !important;
-      }
-      /* 좌측 패널의 고정 높이/스크롤을 해제 → 오른쪽 높이에 맞춰 함께 늘어남 */
-      .about-left {
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
-        /* 데스크톱에서 고정 헤더 아래에 자연스럽게 따라오게 하고 싶다면(선택):
-          position: sticky; top: 24px;  를 쓰되, height:auto 상태를 유지하세요. */
-      }
-      /* 섹션 자체도 잘림 없게 */
-      .about-sec {
-        overflow: visible !important;
-      }
-      /* 두 컬럼 하단이 붙을 때 여유 */
-      .about-sec { padding-bottom: 24px !important; }
-    }
-  </style>
 </head>
 
 <script>
-  // 탭 클릭 시 내용 토글 (원본 유지)
+  // 탭 클릭 시 내용 토글
   document.addEventListener('DOMContentLoaded', function() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -695,9 +256,7 @@
 </script>
 
 <body>
-  <div class="custom-cursor">
-    <span class="blind">커스텀 커서</span>
-  </div>
+  <div class="custom-cursor"><span class="blind">커스텀 커서</span></div>
 
   <header class="header">
     <div class="header-inner">
@@ -705,9 +264,7 @@
         <h2 class="header-tit">Quick links</h2>
         <ul class="header-quick-list">
           <li class="header-quick-item on"><a href="#">Home</a></li>
-          <li class="header-quick-item">
-            <a href="https://invited-note-640.notion.site/1b079dc5e31e81dcba02d929bb00b9b7?v=1b079dc5e31e8185891b000c33a7d31c">Notion</a>
-          </li>
+          <li class="header-quick-item"><a href="https://invited-note-640.notion.site/1b079dc5e31e81dcba02d929bb00b9b7?v=1b079dc5e31e8185891b000c33a7d31c">Notion</a></li>
           <li class="header-quick-item project-link"><a href="#">Projects</a></li>
           <li class="header-quick-item contact-link mov hidden"><a href="#">Contact</a></li>
         </ul>
@@ -725,9 +282,7 @@
 
   <main>
     <div class="main-wrapper">
-      <div class="bottom-overlay">
-        <span class="blind">하단 오버래이</span>
-      </div>
+      <div class="bottom-overlay"><span class="blind">하단 오버래이</span></div>
       
       <!-- 인트로 섹션 -->
       <section class="intro-sec">
@@ -749,23 +304,19 @@
             <div class="profile-img">
               <img src="./assets/img/빅분기사진.jpg" alt="Profile Photo" />
             </div>
-            <h2 class="profile-name">
-              박지혁 <span>(Park JiHyeok)</span>
-            </h2>
+            <h2 class="profile-name">박지혁 <span>(Park JiHyeok)</span></h2>
             <ul class="profile-info">
               <li><strong>Birth:</strong> 1998.11.09</li>
               <li><strong>Mobile:</strong> +82 10.4492.0802</li>
               <li><strong>Email:</strong> peter110998@naver.com</li>
             </ul>
 
-            <!-- ▼▼▼ 탭 영역 시작 ▼▼▼ -->
             <div class="profile-desc">
               <div class="tab-buttons">
                 <button class="tab-btn active" data-tab="ai">AI 개발자</button>
                 <button class="tab-btn" data-tab="web">웹 개발자</button>
               </div>
 
-              <!-- AI 개발자 설명 -->
               <div class="tab-content ai active">
                 <p><strong>AI 개발자로서의 강점</strong></p>
                 <ul>
@@ -776,12 +327,12 @@
                 </ul>
               </div>
 
-              <!-- 웹 개발자 설명 -->
               <div class="tab-content web">
                 <p><strong>웹 개발자로서의 경험</strong></p>
                 <ul>
                   <li><strong>실전 배포 경험</strong> ─ 약 6개월 동안 모 기업에서 사용하는 연차료 관리 시스템을 기획·디자인·퍼블리싱 팀과 2주 스프린트로 협업하며 개발한 끝에, 현재까지도 200+ 임직원이 안정적으로 사용 중입니다.</li>
-                  <li><strong>백엔드 전문성</strong> ─ Django·Spring Boot·Node.js 기반 REST API 설계 경험이 풍부하며, AI 모델을 탑재한 웹 애플리케이션을 다수 개발하여 실제 예측·분석 기능이 동작하는 서비스로 구현해낸 경험이 있습니다.</li>                </ul>
+                  <li><strong>백엔드 전문성</strong> ─ Django·Spring Boot·Node.js 기반 REST API 설계 경험이 풍부하며, AI 모델을 탑재한 웹 애플리케이션을 다수 개발하여 실제 예측·분석 기능이 동작하는 서비스로 구현해낸 경험이 있습니다.</li>
+                </ul>
                 <p><strong>웹 개발자로서의 태도</strong></p>
                 <ul>
                   <li><strong>사용자 중심 설계</strong> ─ ‘왜 필요할까?’를 먼저 고민하고, 데이터를 근거로 기능을 제안·검증하여 불필요한 개발 사이클을 줄입니다.</li>
@@ -790,11 +341,11 @@
               </div>
             </div>
           </div>
+
           <!-- 오른쪽 영역 -->
           <div class="about-right">
             <div class="skills">
               <h3 class="skills-title">SKILLS & ABILITIES</h3>
-            
               <div class="skills-section">
                 <h4 class="section-title">Web Development</h4>
                 <ul>
@@ -803,7 +354,6 @@
                   <li><strong>Database/DevOps:</strong> MySQL, SQLite, AWS(EC2, Lightsail), Docker, Azure</li>
                 </ul>
               </div>
-            
               <div class="skills-section">
                 <h4 class="section-title">AI & Data</h4>
                 <ul>
@@ -812,7 +362,6 @@
                   <li><strong>Data Visualization:</strong> Matplotlib, Seaborn</li>
                 </ul>
               </div>
-            
               <div class="skills-section">
                 <h4 class="section-title">Collaboration & Tools</h4>
                 <ul>
@@ -823,7 +372,7 @@
                 </ul>
               </div>
             </div>
-      
+
             <div class="awards">
               <h3>CERTIFICATES</h3>
               <p>정보처리기사 (2024. 06.18 취득)</p>
@@ -833,11 +382,9 @@
       </section>
       
       <section class="awards-sec">
-        <!-- 하단 영역: 2개씩 3줄 (총 6개) -->
         <div class="awards-section">
           <h2>대외활동 & 수상내역</h2>
           <div class="awards-grid">
-            <!-- 1 -->
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/제2회한국어AI경진대회.jpg" alt="certificate 1" />
@@ -852,8 +399,7 @@
                 </ul>
               </div>
             </div>
-      
-            <!-- 2 -->
+
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/Heart&Lung.jpg" alt="certificate 2" />
@@ -867,8 +413,7 @@
                 </ul>
               </div>
             </div>
-      
-            <!-- 3 -->
+
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/2022소아엑스레이데이터과제.jpg" alt="certificate 3" />
@@ -886,8 +431,7 @@
                 </ul>
               </div>
             </div>
-      
-            <!-- 4 -->
+
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/객체추적.jpg" alt="certificate 4" />
@@ -902,8 +446,7 @@
                 </ul>
               </div>
             </div>
-      
-            <!-- 5 -->
+
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/2023헬쑥해여.png" alt="certificate 5" />
@@ -918,8 +461,7 @@
                 </ul>
               </div>
             </div>
-      
-            <!-- 6 -->
+
             <div class="award-item">
               <div class="award-image">
                 <img src="./assets/img/에이블상장.jpg" alt="certificate 6" />
@@ -936,17 +478,15 @@
                 </ul>
               </div>
             </div>
-          </div> <!-- end .awards-grid -->
-        
+          </div>
+        </div>
       </section>
 
       <!-- Projects 섹션 -->
       <section class="projects-sec">
         <span class="blind">메인 프로젝트</span>
         <div class="projects-inner">
-          <div class="projects-tit">
-            <h2>my works</h2>
-          </div>
+          <div class="projects-tit"><h2>my works</h2></div>
           <ul class="projects-list">
             <li class="projects-item">
               <div class="projects-link">
@@ -969,11 +509,11 @@
                 </div>
               </div>
             </li>
+
             <li class="projects-item">
               <span class="blind">AI-Hub 데이터셋 구축</span>
               <div class="projects-link">
                 <div class="project-img-block">
-                  <span class="blind">enterprise video</span>
                   <video loop autoplay muted playsinline src="./assets/video/ep_video.mp4"></video>
                 </div>
                 <div class="project-tx-block">
@@ -985,18 +525,19 @@
                     <li class="pj-tag-item">#CVAT</li>
                   </ul>
                   <h3 class="pj-subtit">
-                    2022 인공지능 학습용 데이터 구축 지원사업의 데이터 활용 환류분야에서 당뇨관리 앱을 통한 음식 이미지 활용 프로젝트에 참여하였으며, 구축된 데이터셋이 AI-Hub에 등재되었습니다.
+                    2022 인공지능 학습용 데이터 구축 지원사업의 데이터 활용 환류분야에서 당뇨관리 앱을 통한 음식 이미지
+                    활용 프로젝트에 참여하였으며, 구축된 데이터셋이 AI-Hub에 등재되었습니다.
                   </h3>
                   <a href="https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71392" class="btn-weblink sitelink" target="_blank">Go site</a>
                   <a href="https://invited-note-640.notion.site/1b079dc5e31e80fcb7bfc0cb10d6f0f1" class="btn-weblink codereview" target="_blank">View Details</a>
                 </div>
               </div>
             </li>
+
             <li class="projects-item">
               <span class="blind">명지역길</span>
               <div class="projects-link">
                 <div class="project-img-block">
-                  <span class="blind">enterprise video</span>
                   <img class="kawarock-img" src="./assets/img/kawarock.png" alt="kawarock_img">
                 </div>
                 <div class="project-tx-block">
@@ -1009,13 +550,12 @@
                     충청남도일자리경제진흥원과 함께 '명지역길' 상권 활성화를 촉진하는 앱을 개발하였습니다.
                   </h3>
                   <a href="https://www.myeongjiyeok.com/" class="btn-weblink sitelink" target="_blank">Go site</a>
-                  <a href="https://www.notion.so/1b079dc5e31e8084b127ea7deb2e3a96/" class="btn-weblink codereview" target="_blank">
-                    View Details
-                  </a>
+                  <a href="https://www.notion.so/1b079dc5e31e8084b127ea7deb2e3a96/" class="btn-weblink codereview" target="_blank">View Details</a>
                   <a href="https://www.youtube.com/watch?v=kXSuA6JzCfU" class="btn-weblink sitelink brown" target="_blank">YouTube</a>
                 </div>
               </div>
             </li>
+
             <li class="projects-item">
               <div class="projects-link">
                 <div class="project-img-block">
@@ -1045,12 +585,8 @@
         <div class="experience-inner">
           <h2 class="experience-title">Experiences</h2>
           <div class="year-line">
-            <div class="year-marker">
-              <span class="year-text">2018</span>
-            </div>
-            <div class="year-marker">
-              <span class="year-text">2025</span>
-            </div>
+            <div class="year-marker"><span class="year-text">2018</span></div>
+            <div class="year-marker"><span class="year-text">2025</span></div>
           </div>
           <div class="horizontal-timeline">
             <div class="timeline-item">
@@ -1111,7 +647,7 @@
               <h3 class="timeline-title">스마트팜</h3>
               <p class="timeline-desc">
                 'Hoseo University AgTech Digital Twin Global Center' 와 기업'트윈나노' 에서 스마트팜 관련 자문연구원으로 활동하였습니다.
-                송화버섯을 인식하고 생장단계와 수확적기를 판단하는 AI모델과 쪽파를 수확하는 로봇의 소프트웨어 개발을 담당하였습니다.
+                송화버섯을 인식하고 생장단계를 판단하는 AI모델과 쪽파를 수확하는 로봇의 소프트웨어 개발을 담당하였습니다.
               </p>
             </div>
             <div class="timeline-item">
@@ -1127,15 +663,10 @@
           </div>
         </div>
       </section>
-    </div><!-- /.main-wrapper -->
-  </main>
-
   <footer class="footer">
     <div class="footer-inner">
       <div class="contact-block">
-        <div class="contact-intro-block">
-          <h2 class="contact-tit">contact</h2>
-        </div>
+        <div class="contact-intro-block"><h2 class="contact-tit">contact</h2></div>
         <div class="contact-address-block">
           <div class="address-content">
             <h2 class="contact-name">Park JI Hyeok</h2>
@@ -1169,10 +700,7 @@
                 </svg>
               </a>
             </div>
-            <small class="copyrights">
-              © 2025
-              Park-JiHyeok All Rights Reserved
-            </small>
+            <small class="copyrights">© 2025 Park-JiHyeok All Rights Reserved</small>
           </div>
           <div class="footer-marquee-block">
             <ul class="marquee-list">
@@ -1223,13 +751,11 @@
   <div id="projectModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <div id="modalDetailContent">
-        <!-- 프로젝트 상세 내용이 로드됩니다. -->
-      </div>
+      <div id="modalDetailContent"></div>
     </div>
   </div>
   
-  <!-- 모달 스크립트 (원본 유지) -->
+  <!-- 모달 스크립트 -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var modal = document.getElementById("projectModal");
@@ -1245,25 +771,18 @@
         });
       });
       
-      closeBtn.addEventListener('click', function() {
-        modal.style.display = "none";
-      });
-      
+      closeBtn.addEventListener('click', function() { modal.style.display = "none"; });
       window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
+        if (event.target == modal) modal.style.display = "none";
       });
     });
   </script>
   
-  <!-- 타임라인 스크롤 애니메이션 스크립트 (원본 유지) -->
+  <!-- 타임라인 스크롤 애니메이션 스크립트 -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const timelineItems = document.querySelectorAll('.timeline-item');
-      const observerOptions = {
-        threshold: 0.4
-      };
+      const observerOptions = { threshold: 0.4 };
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1272,10 +791,7 @@
           }
         });
       }, observerOptions);
-      
-      timelineItems.forEach(item => {
-        observer.observe(item);
-      });
+      timelineItems.forEach(item => observer.observe(item));
     });
   </script>
 </body>
