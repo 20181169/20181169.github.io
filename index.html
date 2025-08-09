@@ -652,6 +652,29 @@
       }
     }
   </style>
+  <style>
+    /* ===== 데스크톱(큰 화면)에서 ABOUT 좌우 하단 높이 불일치 해결 ===== */
+    @media (min-width: 1024px) {
+      /* 부모가 아이템을 같은 높이로 늘리도록 */
+      .about-container {
+        align-items: stretch !important;
+      }
+      /* 좌측 패널의 고정 높이/스크롤을 해제 → 오른쪽 높이에 맞춰 함께 늘어남 */
+      .about-left {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        /* 데스크톱에서 고정 헤더 아래에 자연스럽게 따라오게 하고 싶다면(선택):
+          position: sticky; top: 24px;  를 쓰되, height:auto 상태를 유지하세요. */
+      }
+      /* 섹션 자체도 잘림 없게 */
+      .about-sec {
+        overflow: visible !important;
+      }
+      /* 두 컬럼 하단이 붙을 때 여유 */
+      .about-sec { padding-bottom: 24px !important; }
+    }
+  </style>
 </head>
 
 <script>
