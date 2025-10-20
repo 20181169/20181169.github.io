@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio — Responsive</title>
+
+  <!-- CSS: load layout.css (which @imports reset/common/fonts) + main.css -->
+  <link rel="stylesheet" href="./assets/css/layout.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/experience.css" />
+  <link rel="stylesheet" href="./assets/css/rwd-about.css" />
+
+  <!-- Experience section minimal layout (only for the horizontal timeline) -->
+  <style>
+    .experience-sec{ position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+    .experience-sec .horizontal-timeline{ display: flex; align-items: stretch; gap: 24px; padding: 0 24px; height: 100%; width: max-content; }
+    .experience-sec .experience-item{
+      flex: 0 0 auto; min-width: clamp(280px, 70vw, 920px); height: calc(100vh - 80px);
+      border: 1px solid var(--beige, #e6e0d6); border-radius: 16px; padding: 24px;
+      display: grid; grid-template-rows: auto 1fr auto; gap: 12px;
+      background: rgba(20,13,13,.5); backdrop-filter: blur(4px);
+      color: #fff;
+    }
+    .experience-sec .experience-item h3{ font-family: var(--font-en, system-ui); font-size: clamp(28px, 7vw, 56px); line-height: 1; }
+    .experience-sec .experience-item p{ line-height: 1.6; word-break: keep-all; }
+
+    /* Mobile niceties */
+    @media (max-width:768px){
+      .experience-sec .experience-item{ min-width: 86vw; height: calc(100vh - 64px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- custom cursor (hidden on mobile by common.css) -->
+  <div class="custom-cursor" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <div class="header-quick-block">
+        <nav aria-label="빠른 이동">
+          <ul class="header-quick-list">
+            <li class="header-quick-item on">
+              <a href="#projects" class="project-link" role="button">Projects</a>
+            </li>
+            <li class="header-quick-item hidden">
+              <a href="#contact" class="contact-link" role="button">Contact</a>
+            </li>
+            <!-- 모바일 전용 Contact 버튼 (JS가 .mov 대상으로 처리) -->
+            <li class="header-quick-item mobile">
+              <a href="#contact" class="contact-link mov" role="button">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-hello-block">
+        <strong class="header-tit" aria-label="Welcome">WELCOME</strong>
+        <p>포트폴리오에 오신 것을 환영합니다.</p>
+      </div>
+      <div class="header-contact-block" aria-label="연락처 상태">
+        <div class="status-dot" aria-live="polite"><span class="blind">상태: 온라인</span></div>
+        <a href="#contact" class="contact-link" role="button" aria-label="연락 섹션으로 이동">Let’s talk</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- subtle gradient overlay for transitions -->
+  <div class="bottom-overlay" aria-hidden="true"></div>
+
+  <!-- Intro -->
+  <section class="intro-sec" aria-label="인트로">
+    <div class="sticky-wrapper">
+      <div class="sticky">
+        <img src="./assets/img/hero.jpg" alt="배경 이미지" />
+        <div class="intro-inner">
+          <h1 class="intro-tx" data-text="split">PORTFOLIO</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about-sec" aria-label="소개">
+    <div class="about-container">
+      <div class="about-left">ABOUT</div>
+      <div class="about-right">
+        <p>
+          데이터/웹/AI 프로젝트를 통해 사용자 경험과 비즈니스 가치를 동시에 높이는 것을 목표로 합니다.
+          인프라부터 프런트엔드까지 엔드-투-엔드 환경에서 빠르게 실험하고 안정적으로 배포합니다.
+        </p>
+      </div>
+      <div class="lottie-block" aria-hidden="true">
+        <div id="lottie" style="width:160px;height:160px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects (sticky horizontal on desktop, stacked on mobile) -->
+  <section id="projects" class="projects-sec" aria-label="메인 프로젝트">
+    <h2 class="projects-tit">Projects</h2>
+    <div class="projects-inner" aria-live="polite">
+      <ul class="projects-list">
+        <!-- Project 1 -->
+        <li class="projects-item">
+          <a class="projects-link" href="#" aria-label="프로젝트 1 상세">
+            <div class="project-img-block">
+              <img src="./assets/img/project_01.jpg" alt="프로젝트 1 미리보기" />
+            </div>
+            <div class="project-tx-block">
+              <strong class="pj-tit">Vision-LLM OCR</strong>
+              <p class="pj-subtit">차트/문서 이미지를 구조화 데이터로 변환하는 멀티모달 파이프라인.</p>
+              <ul class="pj-tag-list" aria-label="사용 기술">
+                <li class="pj-tag-item">Python</li>
+                <li class="pj-tag-item">FastAPI</li>
+                <li class="pj-tag-item">GSAP</li>
+              </ul>
+              <div>
+                <a class="btn-weblink sitelink" href="#" target="_blank" rel="noopener">사이트</a>
+                <a class="btn-weblink codereview" href="#" target="_blank" rel="noopener">코드</a>
+              </div>
+            </div>
+          </a>
+        </li>
+        <!-- Project 2 -->
+        <li class="projects-item">
+          <a class="projects-link" href="#" aria-label="프로젝트 2 상세">
+            <div class="project-img-block">
+              <img src="./assets/img/project_02.jpg" alt="프로젝트 2 미리보기" />
+            </div>
+            <div class="project-tx-block">
+              <strong class="pj-tit">Async Gesture</strong>
+              <p class="pj-subtit">스레드 기반 비동기 검출 & 실시간 대시보드.</p>
+              <ul class="pj-tag-list">
+                <li class="pj-tag-item">Thread</li>
+                <li class="pj-tag-item">SQLite</li>
+                <li class="pj-tag-item">WebSocket</li>
+              </ul>
+              <div>
+                <a class="btn-weblink sitelink" href="#" target="_blank" rel="noopener">사이트</a>
+                <a class="btn-weblink codereview" href="#" target="_blank" rel="noopener">코드</a>
+              </div>
+            </div>
+          </a>
+        </li>
+        <!-- Project 3 -->
+        <li class="projects-item">
+          <a class="projects-link" href="#" aria-label="프로젝트 3 상세">
+            <div class="project-img-block">
+              <img src="./assets/img/project_03.jpg" alt="프로젝트 3 미리보기" />
+            </div>
+            <div class="project-tx-block">
+              <strong class="pj-tit">Flood Model</strong>
+              <p class="pj-subtit">GIS/시뮬레이션 파이프라인과 배포 자동화.</p>
+              <ul class="pj-tag-list">
+                <li class="pj-tag-item">Docker</li>
+                <li class="pj-tag-item">CI/CD</li>
+                <li class="pj-tag-item">Map</li>
+              </ul>
+              <div>
+                <a class="btn-weblink sitelink" href="#" target="_blank" rel="noopener">사이트</a>
+                <a class="btn-weblink codereview" href="#" target="_blank" rel="noopener">코드</a>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Side Projects -->
+  <section class="sidepj-sec" aria-label="사이드 프로젝트">
+    <div class="sidepj-inner">
+      <div class="projects-tit">
+        <h2>Side Projects</h2>
+        <p class="projects-tit-subtit">작지만 날카로운 실험들. 모바일에선 단일 열 카드로 정갈하게 표시됩니다.</p>
+      </div>
+      <ul class="sidepj-content-list">
+        <!-- card 1 -->
+        <li class="sidepj-item">
+          <div class="sidepj-item-bg" style="background:url('./assets/img/side_01.jpg') center/cover no-repeat"></div>
+          <div class="sidepj-tx-block">
+            <strong class="sidepj-item-tit">Chart Parser</strong>
+            <div class="sidepj-subtit">
+              <p class="sp-subtit-tx">바 차트/라인 차트에서 데이터 추출 성능 개선.</p>
+              <ul class="sidepj-tag-list">
+                <li class="sidepj-tag-item">LLM</li>
+                <li class="sidepj-tag-item">LoRA</li>
+                <li class="sidepj-tag-item response">RWD</li>
+              </ul>
+              <a href="#" class="btn-weblink sitelink" target="_blank" rel="noopener">보기</a>
+            </div>
+          </div>
+        </li>
+        <!-- card 2 -->
+        <li class="sidepj-item">
+          <div class="sidepj-item-bg" style="background:url('./assets/img/side_02.jpg') center/cover no-repeat"></div>
+          <div class="sidepj-tx-block">
+            <strong class="sidepj-item-tit">Data Tiles</strong>
+            <div class="sidepj-subtit">
+              <p class="sp-subtit-tx">타일 서버 + 프론트 뷰어 구성.</p>
+              <ul class="sidepj-tag-list">
+                <li class="sidepj-tag-item">FastAPI</li>
+                <li class="sidepj-tag-item only-pc">Desktop</li>
+                <li class="sidepj-tag-item">Map</li>
+              </ul>
+              <a href="#" class="btn-weblink sitelink" target="_blank" rel="noopener">보기</a>
+            </div>
+          </div>
+        </li>
+        <!-- card 3 -->
+        <li class="sidepj-item">
+          <div class="sidepj-item-bg" style="background:url('./assets/img/side_03.jpg') center/cover no-repeat"></div>
+          <div class="sidepj-tx-block">
+            <strong class="sidepj-item-tit">ByteTrack</strong>
+            <div class="sidepj-subtit">
+              <p class="sp-subtit-tx">트래킹 안정화와 경량화 실험.</p>
+              <ul class="sidepj-tag-list">
+                <li class="sidepj-tag-item">CV</li>
+                <li class="sidepj-tag-item">Tracking</li>
+                <li class="sidepj-tag-item">Python</li>
+              </ul>
+              <a href="#" class="btn-weblink sitelink" target="_blank" rel="noopener">보기</a>
+            </div>
+          </div>
+        </li>
+        <!-- card 4 -->
+        <li class="sidepj-item">
+          <div class="sidepj-item-bg" style="background:url('./assets/img/side_04.jpg') center/cover no-repeat"></div>
+          <div class="sidepj-tx-block">
+            <strong class="sidepj-item-tit">SRGAN</strong>
+            <div class="sidepj-subtit">
+              <p class="sp-subtit-tx">저조도 영상 개선 실험.</p>
+              <ul class="sidepj-tag-list">
+                <li class="sidepj-tag-item">GAN</li>
+                <li class="sidepj-tag-item">Video</li>
+                <li class="sidepj-tag-item">PyTorch</li>
+              </ul>
+              <a href="#" class="btn-weblink sitelink" target="_blank" rel="noopener">보기</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Experiences (horizontal timeline) -->
+  <section class="experience-sec" aria-label="경험 타임라인">
+    <div class="horizontal-timeline">
+      <article class="experience-item">
+        <h3>2023</h3>
+        <p>Heart & Lung Sound AI Challenge — 최우수상. 신호 전처리 + CNN 앙상블.</p>
+        <small>Signal • CNN • Ensemble</small>
+      </article>
+      <article class="experience-item">
+        <h3>2024</h3>
+        <p>한국어 AI 경진대회 — 특별상. 멀티태스크 학습과 데이터 증강.</p>
+        <small>NLP • Augmentation</small>
+      </article>
+      <article class="experience-item">
+        <h3>2025</h3>
+        <p>Async Detection Service — 비동기 처리/모니터링 파이프라인 설계.</p>
+        <small>FastAPI • Thread • GSAP</small>
+      </article>
+      <article class="experience-item">
+        <h3>Next</h3>
+        <p>Vision-LLM 상용화와 실시간 추론 파이프라인 고도화.</p>
+        <small>Vision-LLM • Realtime</small>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <section id="contact" class="contact-block" aria-label="연락">
+        <div class="contact-intro-block">
+          <div class="contact-tit">CONTACT</div>
+        </div>
+        <div class="contact-address-block">
+          <div class="address-content">
+            <h3 class="contact-name">JIHYEOK PARK</h3>
+            <address>
+              <span>Email: <a href="mailto:you@example.com">you@example.com</a></span>
+              <span>GitHub: <a href="https://github.com/20181169" target="_blank" rel="noopener">20181169</a></span>
+              <span>Blog: <a href="https://velog.io" target="_blank" rel="noopener">velog.io</a></span>
+            </address>
+            <div class="contact-btn-block">
+              <a href="https://velog.io" class="velog-ic" target="_blank" rel="noopener" aria-label="Velog로 이동">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Z"/></svg>
+              </a>
+              <a href="https://github.com/20181169" class="github-ic" target="_blank" rel="noopener" aria-label="GitHub로 이동">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 8.33 6.84 9.68.5.09.68-.22.68-.49 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1.01.07 1.54 1.06 1.54 1.06 .9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.15-4.56-5.13 0-1.13.39-2.06 1.03-2.79-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.23 9.23 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05 .55 1.42.2 2.47.1 2.73 .64.73 1.03 1.66 1.03 2.79 0 3.99-2.34 4.86-4.57 5.12.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.59.69.49A10.05 10.05 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
+              </a>
+            </div>
+            <small class="copyrights">© <span id="year"></span> Jihyeok Park. All rights reserved.</small>
+          </div>
+        </div>
+        <div class="footer-marquee-block" aria-hidden="true">
+          <ul class="marquee-list">
+            <li class="marquee-item">creative</li>
+            <li class="marquee-item">reliable</li>
+            <li class="marquee-item">scalable</li>
+            <li class="marquee-item">creative</li>
+            <li class="marquee-item">reliable</li>
+            <li class="marquee-item">scalable</li>
+          </ul>
+          <ul class="marquee-list" aria-hidden="true" aria-label="스크롤 텍스트 반복">
+            <li class="marquee-item">creative</li>
+            <li class="marquee-item">reliable</li>
+            <li class="marquee-item">scalable</li>
+            <li class="marquee-item">creative</li>
+            <li class="marquee-item">reliable</li>
+            <li class="marquee-item">scalable</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </footer>
+
+  <noscript>이 사이트는 애니메이션과 부드러운 스크롤을 위해 자바스크립트를 사용합니다. 브라우저에서 JavaScript를 활성화해 주세요.</noscript>
+
+  <!-- Vendor scripts (match index.patched.js expectations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/split-type@0.3.4/umd/index.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+  <!-- Your behavior JS (provided) -->
+  <script src="./assets/js/index.patched.js" defer></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

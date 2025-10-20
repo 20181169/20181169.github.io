@@ -14,14 +14,20 @@ body.begie {
 /* intro section */
 .intro-sec{ 
     position: relative; 
-    height: 200vh;
+    height: 300vh;          /* 200vh -> 300vh (sticky-wrapper와 일치) */
     filter:brightness(1);
+    z-index: 0;             /* 뒤로 보냄 */
 }
-.intro-sec .sticky-wrapper{ height: 300vh; }
+.intro-sec .sticky-wrapper{ 
+    height: 300vh; 
+    position: relative;
+    z-index: 0;
+}
 .intro-sec .sticky-wrapper .sticky{
     position: sticky;
     height: 100vh;
     top: 0;
+    z-index: 0;
 }
 .intro-sec img {
     position: absolute;
@@ -30,6 +36,7 @@ body.begie {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.3);
+    z-index: 0;
 }
 .intro-sec .intro-inner{
     position: relative;
@@ -38,6 +45,7 @@ body.begie {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    z-index: 0;
 }
 .intro-sec .intro-inner .intro-tx{
     font-size: 14vw;
@@ -47,10 +55,13 @@ body.begie {
 .intro-sec .intro-inner .intro-tx .char{ transform: translateY(100%); }
 
 /* about section */
-.about-sec{ 
-    position: relative;
-    height: 100vh;
-    background: var(--dark);
+.about-sec{
+  position: relative;
+  z-index: 2;              /* 다음 섹션을 위로 */
+  height: auto !important; /* 고정 높이 제거 */
+  background: #f9f9f9;     /* awards-sec와 톤 통일 */
+  padding: 2rem 0;         /* awards-sec와 유사한 여백 */
+  box-sizing: border-box;
 }
 .about-inner{
     display: flex;
@@ -76,6 +87,17 @@ body.begie {
 .lottie-block {
     position: absolute;
     bottom: 270px;right: 700px;
+}
+
+/* ── Intro 이후 모든 섹션을 앞쪽(z=2)으로 고정 ── */
+.awards-sec,
+.projects-sec,
+.experience-sec,
+.sidepj-sec,
+footer,
+.footer{
+  position: relative;
+  z-index: 2;
 }
 
 /* project section */
@@ -182,8 +204,6 @@ body.begie {
 
 /* 기존 버튼 스타일 (필요시 조정) */
 .projects-sec .btn-weblink{
-    /* 기존에 block으로 잡혀 있고 margin-left: auto 로 오른쪽 정렬 */
-    /* 필요 없으면 주석 처리하세요 */
     display: block; 
     margin-left: auto; 
     margin-top: 10px; 
@@ -486,22 +506,20 @@ body.begie {
    [1] 버튼 크기 고정 & 텍스트 중앙 정렬
    ======================================= */
 .btn-weblink {
-    /* 기존 코드에 덮어씌울 수 있도록! */
     display: inline-flex !important; /* 수평/수직 중앙 정렬 */
     justify-content: center;
     align-items: center;
     width: 200px;       /* 버튼 폭 */
     height: 50px;       /* 버튼 높이 */
-    margin-left: 0;     /* 필요 시 auto 대신 원하는 값으로 조정 */
+    margin-left: 0;     /* 필요시 조정 */
     margin-top: 10px;   /* 상단 여백은 유지 */
-    padding: 0;         /* 내부 여백을 일단 제거 후 */
+    padding: 0;         /* 내부 여백 제거 */
     font-size: 16px;    
     font-weight: 600;
     text-decoration: none;
     transition: .3s;
 }
 .btn-weblink p {
-    /* <p> 태그 기본 마진 제거 */
     margin: 0;
     padding: 0;
 }

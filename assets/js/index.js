@@ -1,33 +1,56 @@
-// GSAP 플러그인 등록
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// ----------------------------------
-// 1. Experiences 가로 타임라인 스크롤 구현
-// ----------------------------------
-ScrollTrigger.create({
-  trigger: ".experience-sec",
-  pin: true, // 섹션을 고정하여 스크롤 시 화면에 유지
-  scrub: 1,  // 스크롤에 따른 자연스러운 애니메이션
-  start: "top top", // 섹션이 뷰포트 상단에 닿을 때 시작
-  // 타임라인 전체 너비만큼 추가 스크롤
-  end: () => "+=" + document.querySelector(".horizontal-timeline").scrollWidth,
+/* =========================================================
+ * [A] Experiences 가로 타임라인(방향 고정) - 반응형 구현
+ *  - 데스크톱(>=1024px): 세로 스크롤 ↓ → 오른쪽 진행(콘텐츠는 왼쪽으로 이동)
+ *  - 모바일/태블릿: GSAP 비활성 + 네이티브 가로 스크롤
+ * ========================================================= */
+const mmExp = gsap.matchMedia();
+
+mmExp.add("(min-width: 1024px)", () => {
+  const section = document.querySelector(".experience-sec");
+  const track   = document.querySelector(".horizontal-timeline");
+  if (!section || !track) return;
+
+  // 이동 거리 = 트랙 전체 너비 - 뷰포트 너비
+  const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+  // 시작 위치 초기화
+  gsap.set(track, { x: 0 });
+
+  // 스크롤을 내리면 콘텐츠가 왼쪽(-x)으로 이동 → 사용자 입장에서는 오른쪽 항목으로 진행
+  const tween = gsap.to(track, {
+    x: () => -getDistance(),
+    ease: "none",
+    scrollTrigger: {
+      trigger: section,
+      pin: true,
+      scrub: 1,
+      start: "top top",
+      end: () => "+=" + getDistance(),   // 필요 거리만큼만 스크롤
+      invalidateOnRefresh: true,         // 리사이즈시 재계산
+    },
+  });
+
+  // cleanup (이 미디어쿼리를 벗어날 때)
+  return () => {
+    tween.scrollTrigger?.kill();
+    tween.kill();
+    gsap.set(track, { clearProps: "transform" });
+  };
 });
 
-gsap.to(".horizontal-timeline", {
-  // 내부 타임라인을 왼쪽으로 이동시켜 가로 스크롤 효과 구현
-  x: () => -(document.querySelector(".horizontal-timeline").scrollWidth - window.innerWidth),
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".experience-sec",
-    start: "top top",
-    end: () => "+=" + document.querySelector(".horizontal-timeline").scrollWidth,
-    scrub: 1,
-  },
+mmExp.add("(max-width: 1023px)", () => {
+  // 모바일/태블릿: 혹시 남은 트리거 제거 & 변환 초기화
+  ScrollTrigger.getAll().forEach((t) => {
+    if (t.trigger && t.trigger.classList.contains("experience-sec")) t.kill();
+  });
+  gsap.set(".horizontal-timeline", { clearProps: "all" });
 });
 
-// ----------------------------------
-// 2. Lenis 스크롤 및 기본 설정
-// ----------------------------------
+/* ----------------------------------
+ * 2. Lenis 스크롤 및 기본 설정
+ * ---------------------------------- */
 
 // 브라우저 새로고침 시 스크롤 위치 초기화
 history.scrollRestoration = "manual";
@@ -36,22 +59,23 @@ history.scrollRestoration = "manual";
 const lenis = new Lenis();
 lenis.on("scroll", ScrollTrigger.update);
 gsap.ticker.add((time) => {
+  // 프로젝트에서 쓰던 래프 비율 유지
   lenis.raf(time * 900);
 });
 gsap.ticker.lagSmoothing(0);
 
-// ----------------------------------
-// 3. 커스텀 커서
-// ----------------------------------
+/* ----------------------------------
+ * 3. 커스텀 커서
+ * ---------------------------------- */
 const cursor = document.querySelector(".custom-cursor");
 document.addEventListener("mousemove", (e) => {
   cursor.style.top = `${e.clientY}px`;
   cursor.style.left = `${e.clientX}px`;
 });
 
-// ----------------------------------
-// 4. Lottie 애니메이션
-// ----------------------------------
+/* ----------------------------------
+ * 4. Lottie 애니메이션
+ * ---------------------------------- */
 lottie.loadAnimation({
   container: document.getElementById("lottie"),
   renderer: "svg",
@@ -60,14 +84,14 @@ lottie.loadAnimation({
   path: "./assets/video/lottie_01.json",
 });
 
-// ----------------------------------
-// 5. 텍스트 분리 (SplitType)
-// ----------------------------------
+/* ----------------------------------
+ * 5. 텍스트 분리 (SplitType)
+ * ---------------------------------- */
 const splitText = new SplitType('[data-text="split"]', { types: "chars" });
 
-// ----------------------------------
-// 6. 상단 네비게이션 링크 (Projects, Contact)
-// ----------------------------------
+/* ----------------------------------
+ * 6. 상단 네비게이션 링크 (Projects, Contact)
+ * ---------------------------------- */
 const toProjects = document.querySelector(".project-link");
 const toContact = document.querySelector(".contact-link");
 
@@ -77,20 +101,18 @@ function projectLink() {
     scrollTo: { y: ".projects-sec" },
   });
 }
-
 function contactLink() {
   gsap.to(window, {
     duration: 1,
     scrollTo: { y: ".contact-address-block" },
   });
 }
-
 toProjects.addEventListener("click", projectLink);
 toContact.addEventListener("click", contactLink);
 
-// ----------------------------------
-// 7. 스크롤 시 Header 숨기기/보이기
-// ----------------------------------
+/* ----------------------------------
+ * 7. 스크롤 시 Header 숨기기/보이기
+ * ---------------------------------- */
 let lastScrollY = window.scrollY;
 const header = document.querySelector(".header");
 window.addEventListener("scroll", function () {
@@ -105,9 +127,9 @@ window.addEventListener("scroll", function () {
   lastScrollY = currentScrollY;
 });
 
-// ----------------------------------
-// 8. Contact 섹션 진입 시 Contact 텍스트 페이드인
-// ----------------------------------
+/* ----------------------------------
+ * 8. Contact 섹션 진입 시 Contact 텍스트 페이드인
+ * ---------------------------------- */
 gsap.set(".contact-tit", { autoAlpha: 0 });
 const contactTimeline = gsap.timeline({
   scrollTrigger: {
@@ -122,11 +144,11 @@ contactTimeline.to(".contact-tit", {
   duration: 0.5,
 });
 
-// ----------------------------------
-// 9. Footer marquee 애니메이션 (위로 슬라이드)
-// ----------------------------------
+/* ----------------------------------
+ * 9. Footer marquee 애니메이션 (위로 슬라이드)
+ * ---------------------------------- */
 gsap.set(".footer-marquee-block", { y: 100 });
-const marquee = gsap.to(".footer-marquee-block", {
+gsap.to(".footer-marquee-block", {
   scrollTrigger: {
     trigger: ".contact-address-block",
     start: "90% 100%",
@@ -141,46 +163,40 @@ const marquee = gsap.to(".footer-marquee-block", {
   },
 });
 
-// ----------------------------------
-// 10. 반응형 처리 (gsap.matchMedia)
-// ----------------------------------
+/* ----------------------------------
+ * 10. 반응형 처리 (gsap.matchMedia)
+ * ---------------------------------- */
 let mm = gsap.matchMedia();
 
 // PC 버전
 mm.add("(min-width: 769px)", function () {
-  const toContact = document.querySelector(".contact-link.mov");
-  const toContactSec = document.querySelector(".contact-link:nth-child(2)");
+  const toContactPcBtn = document.querySelector(".contact-link.mov");
+  const toContactHeaderBtn = document.querySelector(".contact-link:nth-child(2)");
 
   // 상단 네비 링크 (PC 전용)
-  toContactSec.classList.remove("hidden");
-  toContact.classList.add("hidden");
-  function contactLink() {
+  toContactHeaderBtn.classList.remove("hidden");
+  toContactPcBtn.classList.add("hidden");
+  function contactLinkPc() {
     gsap.to(window, {
       duration: 1,
       scrollTo: { y: ".contact-address-block" },
     });
   }
-  toContactSec.addEventListener("click", contactLink);
+  toContactHeaderBtn.addEventListener("click", contactLinkPc);
 
   // 사이드 프로젝트 섹션 진입 시 배경색 전환
   ScrollTrigger.create({
     trigger: ".sidepj-sec",
     start: "0% 30%",
     end: "100% 100%",
-    toggleClass: {
-      targets: "body",
-      className: "begie",
-    },
+    toggleClass: { targets: "body", className: "begie" },
   });
 
   // 인트로 텍스트 글자별 애니메이션
   gsap.to(".intro-sec .intro-inner .intro-tx .char", {
     delay: 0.2,
     y: 0,
-    stagger: {
-      from: "random",
-      each: 0.01,
-    },
+    stagger: { from: "random", each: 0.01 },
   });
 
   // 인트로 이미지 어둡게 처리
@@ -205,7 +221,7 @@ mm.add("(min-width: 769px)", function () {
   intro.from(".header", { autoAlpha: 0 });
 
   // about 섹션: Lottie 이미지 이동 애니메이션
-  const lottie01 = gsap.to(".lottie-block", {
+  gsap.to(".lottie-block", {
     scrollTrigger: {
       trigger: ".about-sec",
       start: "0% 0%",
@@ -216,7 +232,7 @@ mm.add("(min-width: 769px)", function () {
   });
 
   // 메인 프로젝트 섹션: 가로 스크롤 애니메이션
-  const projects = gsap.to(".projects-list", {
+  gsap.to(".projects-list", {
     scrollTrigger: {
       trigger: ".projects-sec",
       start: "0% 0%",
@@ -229,7 +245,7 @@ mm.add("(min-width: 769px)", function () {
   });
 
   // 사이드 프로젝트 섹션 진입 시 하단 오버레이 및 커서 변경
-  const sidepj = gsap.timeline({
+  gsap.timeline({
     scrollTrigger: {
       trigger: ".sidepj-sec",
       start: "0% 0%",
@@ -249,21 +265,18 @@ mm.add("(min-width: 769px)", function () {
 
 // 모바일 버전
 mm.add("(max-width: 768px)", function () {
-  const toContact = document.querySelector(".contact-link.mov");
-  toContact.classList.remove("hidden");
+  const toContactMobileBtn = document.querySelector(".contact-link.mov");
+  toContactMobileBtn.classList.remove("hidden");
 
   // 인트로 텍스트 글자별 애니메이션 (모바일)
   gsap.to(".intro-sec .intro-inner .intro-tx .char", {
     delay: 0.2,
     y: 0,
-    stagger: {
-      from: "random",
-      each: 0.01,
-    },
+    stagger: { from: "random", each: 0.01 },
   });
 
   // 모바일: 인트로 텍스트 상단으로 이동 애니메이션
-  const introtx = gsap.to(".intro-tx", {
+  gsap.to(".intro-tx", {
     scrollTrigger: {
       trigger: ".intro-sec",
       start: "50% 50%",
@@ -274,9 +287,9 @@ mm.add("(max-width: 768px)", function () {
   });
 });
 
-// ----------------------------------
-// 11. Experiences 섹션 개별 애니메이션 (경험 항목 페이드인)
-// ----------------------------------
+/* ----------------------------------
+ * 11. Experiences 섹션 개별 카드 페이드인(옵션)
+ * ---------------------------------- */
 gsap.from(".experience-item", {
   scrollTrigger: {
     trigger: ".experience-sec",
